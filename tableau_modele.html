@@ -8,7 +8,9 @@
 <meta name="apple-mobile-web-app-title" content="Radar cadeaux">
 <title>Radar cadeaux de Noël</title>
 <script>try { if (localStorage.getItem("radar-avance") !== "1") document.documentElement.classList.add("simple"); } catch (e) { document.documentElement.classList.add("simple"); }</script>
-<script>try { var th = localStorage.getItem("radar-theme"); if (th === "light" || th === "dark") document.documentElement.setAttribute("data-theme", th); } catch (e) {}</script>
+<script>/* clair par défaut ; sombre ou automatique seulement si la personne l'a choisi */
+var th = "light"; try { th = localStorage.getItem("radar-theme") || "light"; } catch (e) {}
+if (th === "light" || th === "dark") document.documentElement.setAttribute("data-theme", th);</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -629,7 +631,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   function setTheme(v) {
     if (v === "light" || v === "dark") document.documentElement.setAttribute("data-theme", v);
     else { document.documentElement.removeAttribute("data-theme"); v = "auto"; }
-    try { if (v === "auto") localStorage.removeItem("radar-theme"); else localStorage.setItem("radar-theme", v); } catch (e) {}
+    try { localStorage.setItem("radar-theme", v); } catch (e) {}
     Array.prototype.forEach.call($("theme").children, function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-v") === v)); });
   }
   setTheme(document.documentElement.getAttribute("data-theme") || "auto");
