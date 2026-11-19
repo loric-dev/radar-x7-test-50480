@@ -224,3 +224,204 @@ enseignes:
   - {site: www.alain.ducasse-chocolat.com, nom: Le Chocolat Alain Ducasse, interet: gourmand}
   - {site: www.smartbox.com, nom: Smartbox, interet: experiences}
   - {site: www.wonderbox.fr, nom: Wonderbox, interet: experiences}
+
+  # ===== Deuxième série (ajoutée le 19/11)
+  # --- Mode femme & grands magasins
+  - {site: www.ikks.com, nom: IKKS, interet: mode_femme}
+  - {site: www.iroparis.com, nom: IRO, interet: mode_femme}
+  - {site: www.bizzbee.com, nom: Bizzbee, interet: mode_femme}
+  - {site: www.berenice.net, nom: Bérénice, interet: mode_femme}
+  - {site: www.lahalle.com, nom: La Halle, interet: mode_femme}
+  - {site: www.gemo.fr, nom: Gémo, interet: mode_femme}
+  - {site: www.c-and-a.com, nom: C&A, interet: mode_femme}
+  - {site: www.boohoo.com, nom: boohoo, interet: mode_femme}
+  - {site: www.lebonmarche.com, nom: Le Bon Marché, interet: mode_femme}
+  - {site: www.24s.com, nom: 24S, interet: mode_femme}
+  - {site: www.placedestendances.com, nom: Place des Tendances, interet: mode_femme}
+  - {site: www.vestiairecollective.com, nom: Vestiaire Collective, interet: sacs_bijoux}
+  - {site: www.mytheresa.com, nom: Mytheresa, interet: mode_femme}
+  - {site: www.yoox.com, nom: YOOX, interet: mode_femme}
+  - {site: www.farfetch.com, nom: Farfetch, interet: mode_femme}
+  - {site: www.ssense.com, nom: SSENSE, interet: mode_homme}
+  - {site: www.darjeeling.fr, nom: Darjeeling, interet: mode_femme}
+  - {site: www.chantelle.com, nom: Chantelle, interet: mode_femme}
+  - {site: www.passionata.com, nom: Passionata, interet: mode_femme}
+  - {site: www.petit-bateau.fr, nom: Petit Bateau, interet: mode_femme}
+  # --- Enfants
+  - {site: www.okaidi.fr, nom: Okaïdi, interet: jouets}
+  - {site: www.vertbaudet.fr, nom: Vertbaudet, interet: jouets}
+  - {site: www.jacadi.fr, nom: Jacadi, interet: jouets}
+  - {site: www.dpam.com, nom: Du Pareil au Même, interet: jouets}
+  - {site: www.catimini.com, nom: Catimini, interet: jouets}
+  - {site: www.tartine-et-chocolat.com, nom: Tartine et Chocolat, interet: jouets}
+  # --- Mode homme
+  - {site: www.de-fursac.fr, nom: De Fursac, interet: mode_homme}
+  - {site: www.hackett.com, nom: Hackett, interet: mode_homme}
+  - {site: www.gant.fr, nom: GANT, interet: mode_homme}
+  - {site: fr.tommy.com, nom: Tommy Hilfiger, interet: mode_homme}
+  - {site: www.calvinklein.fr, nom: Calvin Klein, interet: mode_homme}
+  - {site: www.hugoboss.com, nom: Hugo Boss, interet: mode_homme}
+  - {site: www.fredperry.com, nom: Fred Perry, interet: mode_homme}
+  - {site: www.barbour.com, nom: Barbour, interet: mode_homme}
+  - {site: www.championstore.com, nom: Champion, interet: mode_homme}
+  - {site: www.fila.com, nom: Fila, interet: sneakers}
+  - {site: www.oxbow.fr, nom: Oxbow, interet: mode_homme}
+  - {site: www.quiksilver.fr, nom: Quiksilver, interet: mode_homme}
+  - {site: www.roxy.fr, nom: Roxy, interet: mode_femme}
+  # --- Chaussures
+  - {site: www.chausport.com, nom: Chausport, interet: sneakers}
+  - {site: www.bocage.fr, nom: Bocage, interet: sneakers}
+  - {site: www.jonak-paris.com, nom: Jonak, interet: sneakers}
+  - {site: www.texto.fr, nom: Texto, interet: sneakers}
+  - {site: www.paraboot.com, nom: Paraboot, interet: sneakers}
+  - {site: www.clarks.fr, nom: Clarks, interet: sneakers}
+  - {site: www.ecco.com, nom: ECCO, interet: sneakers}
+  - {site: www.geox.com, nom: Geox, interet: sneakers}
+  - {site: www.camper.com, nom: Camper, interet: sneakers}
+  - {site: www.palladiumboots.fr, nom: Palladium, interet: sneakers}
+  - {site: www.reebok.eu, nom: Reebok, interet: sneakers}
+  - {site: www.on.com, nom: On, interet: sneakers}
+  - {site: www.saucony.com, nom: Saucony, interet: sneakers}
+  - {site: www.veja-store.com, nom: Veja, interet: sneakers}
+  # --- Bijoux & montres
+  - {site: www.thomassabo.com, nom: Thomas Sabo, interet: sacs_bijoux}
+  - {site: www.lesnereides.com, nom: Les Néréides, interet: sacs_bijoux}
+  - {site: www.gas-bijoux.com, nom: Gas Bijoux, interet: sacs_bijoux}
+  - {site: www.dinhvan.com, nom: Dinh Van, interet: sacs_bijoux}
+  - {site: www.mauboussin.fr, nom: Mauboussin, interet: sacs_bijoux}
+  - {site: www.cleor.com, nom: Cleor, interet: sacs_bijoux}
+  - {site: www.edenly.com, nom: Edenly, interet: sacs_bijoux}
+  - {site: www.gemmyo.com, nom: Gemmyo, interet: sacs_bijoux}
+  - {site: www.zag-bijoux.com, nom: Zag Bijoux, interet: sacs_bijoux}
+  - {site: www.pandora.net, nom: Pandora, interet: sacs_bijoux}
+  - {site: www.swarovski.com, nom: Swarovski, interet: sacs_bijoux}
+  - {site: www.tissotwatches.com, nom: Tissot, interet: montres}
+  - {site: www.swatch.com, nom: Swatch, interet: montres}
+  - {site: www.festina.com, nom: Festina, interet: montres}
+  - {site: www.casio.com, nom: Casio, interet: montres}
+  # --- Beauté, parfumeries, parapharmacies
+  - {site: www.lush.com, nom: Lush, interet: soins}
+  - {site: www.clinique.fr, nom: Clinique, interet: soins}
+  - {site: www.esteelauder.fr, nom: Estée Lauder, interet: soins}
+  - {site: www.biotherm.fr, nom: Biotherm, interet: soins}
+  - {site: www.vichy.fr, nom: Vichy, interet: soins}
+  - {site: www.laroche-posay.fr, nom: La Roche-Posay, interet: soins}
+  - {site: www.avene.fr, nom: Avène, interet: soins}
+  - {site: www.bioderma.fr, nom: Bioderma, interet: soins}
+  - {site: www.decleor.fr, nom: Decléor, interet: soins}
+  - {site: www.sisley-paris.com, nom: Sisley, interet: soins}
+  - {site: www.guerlain.com, nom: Guerlain, interet: parfum_femme}
+  - {site: www.yslbeauty.fr, nom: YSL Beauté, interet: maquillage}
+  - {site: www.giorgioarmanibeauty.fr, nom: Armani Beauty, interet: parfum_femme}
+  - {site: www.makeupforever.com, nom: Make Up For Ever, interet: maquillage}
+  - {site: www.narscosmetics.fr, nom: NARS, interet: maquillage}
+  - {site: www.urbandecay.fr, nom: Urban Decay, interet: maquillage}
+  - {site: www.newpharma.fr, nom: Newpharma, interet: soins}
+  - {site: www.pharmacie-lafayette.com, nom: Pharmacie Lafayette, interet: soins}
+  - {site: www.atida.fr, nom: Atida, interet: soins}
+  - {site: www.beautysuccess.fr, nom: Beauty Success, interet: parfum_femme}
+  - {site: www.parfumdo.com, nom: Parfumdo, interet: parfum_femme}
+  - {site: www.perfumesclub.fr, nom: Perfume's Club, interet: parfum_femme}
+  - {site: www.flaconi.fr, nom: flaconi, interet: parfum_femme}
+  - {site: www.origines-parfums.com, nom: Origines Parfums, interet: parfum_femme}
+  - {site: www.sabon.fr, nom: Sabon, interet: soins}
+  - {site: www.braun.fr, nom: Braun, interet: rasage}
+  - {site: www.philips.fr, nom: Philips, interet: rasage}
+  - {site: www.oralb.fr, nom: Oral-B, interet: cheveux}
+  # --- Maison, mobilier, linge
+  - {site: www.roche-bobois.com, nom: Roche Bobois, interet: maison_deco}
+  - {site: www.ligne-roset.com, nom: Ligne Roset, interet: maison_deco}
+  - {site: www.boconcept.com, nom: BoConcept, interet: maison_deco}
+  - {site: www.jysk.fr, nom: JYSK, interet: maison_deco}
+  - {site: www.gifi.fr, nom: GiFi, interet: maison_deco}
+  - {site: www.casashops.com, nom: CASA, interet: maison_deco}
+  - {site: www.centrakor.com, nom: Centrakor, interet: maison_deco}
+  - {site: www.serax.com, nom: Serax, interet: maison_deco}
+  - {site: www.vitra.com, nom: Vitra, interet: maison_deco}
+  - {site: www.kartell.com, nom: Kartell, interet: maison_deco}
+  - {site: www.flos.com, nom: Flos, interet: maison_deco}
+  - {site: www.pols-potten.com, nom: Pols Potten, interet: maison_deco}
+  - {site: www.madamstoltz.com, nom: Madam Stoltz, interet: maison_deco}
+  - {site: www.kavehome.com, nom: Kave Home, interet: maison_deco}
+  - {site: www.maisonsdumonde.com, nom: Maisons du Monde, interet: maison_deco}
+  - {site: www.ampm.fr, nom: AM.PM, interet: maison_deco}
+  - {site: www.habitat.fr, nom: Habitat, interet: maison_deco}
+  - {site: www.essix.fr, nom: Essix, interet: maison_deco}
+  - {site: www.alexandreturpault.com, nom: Alexandre Turpault, interet: maison_deco}
+  - {site: www.garnier-thiebaut.fr, nom: Garnier-Thiebaut, interet: maison_deco}
+  - {site: www.tradition-des-vosges.com, nom: Tradition des Vosges, interet: maison_deco}
+  - {site: www.anne-de-solene.com, nom: Anne de Solène, interet: maison_deco}
+  - {site: www.olivier-desforges.com, nom: Olivier Desforges, interet: maison_deco}
+  - {site: www.thesocialitefamily.com, nom: The Socialite Family, interet: maison_deco}
+  - {site: www.bensimon.com, nom: Bensimon, interet: maison_deco}
+  - {site: www.lampe-berger.fr, nom: Maison Berger, interet: maison_deco}
+  - {site: www.durance.fr, nom: Durance, interet: maison_deco}
+  - {site: www.esteban.fr, nom: Esteban, interet: maison_deco}
+  - {site: www.trudon.com, nom: Trudon, interet: maison_deco}
+  # --- Cuisine & petit électroménager
+  - {site: www.cookut.com, nom: Cookut, interet: cuisine}
+  - {site: www.degrenne.fr, nom: Degrenne, interet: cuisine}
+  - {site: www.debuyer.com, nom: de Buyer, interet: cuisine}
+  - {site: www.opinel.com, nom: Opinel, interet: cuisine}
+  - {site: www.emilehenry.com, nom: Emile Henry, interet: cuisine}
+  - {site: www.mauviel.com, nom: Mauviel, interet: cuisine}
+  - {site: www.tefal.fr, nom: Tefal, interet: cuisine}
+  - {site: www.seb.fr, nom: SEB, interet: cuisine}
+  - {site: www.moulinex.fr, nom: Moulinex, interet: cuisine}
+  - {site: www.krups.fr, nom: Krups, interet: cuisine}
+  - {site: www.magimix.fr, nom: Magimix, interet: cuisine}
+  - {site: www.kenwoodworld.com, nom: Kenwood, interet: cuisine}
+  - {site: www.bialetti.com, nom: Bialetti, interet: cuisine}
+  - {site: www.lavazza.fr, nom: Lavazza, interet: cuisine}
+  - {site: www.mariagefreres.com, nom: Mariage Frères, interet: gourmand}
+  - {site: www.palaisdesthes.com, nom: Palais des Thés, interet: gourmand}
+  - {site: www.kusmitea.com, nom: Kusmi Tea, interet: gourmand}
+  # --- Tech & audio
+  - {site: www.samsung.com, nom: Samsung, interet: tech_audio}
+  - {site: www.sony.fr, nom: Sony, interet: tech_audio}
+  - {site: www.lg.com, nom: LG, interet: tech_audio}
+  - {site: www.mi.com, nom: Xiaomi, interet: tech_audio}
+  - {site: www.oneplus.com, nom: OnePlus, interet: tech_audio}
+  - {site: www.nothing.tech, nom: Nothing, interet: tech_audio}
+  - {site: www.fairphone.com, nom: Fairphone, interet: tech_audio}
+  - {site: www.ubaldi.com, nom: Ubaldi, interet: tech_audio}
+  - {site: www.son-video.com, nom: Son-Vidéo, interet: tech_audio}
+  - {site: www.cobra.fr, nom: Cobra, interet: tech_audio}
+  - {site: www.grosbill.com, nom: Grosbill, interet: tech_audio}
+  - {site: www.topachat.com, nom: Top Achat, interet: tech_audio}
+  - {site: www.devialet.com, nom: Devialet, interet: tech_audio}
+  - {site: www.bang-olufsen.com, nom: Bang & Olufsen, interet: tech_audio}
+  - {site: www.sennheiser.com, nom: Sennheiser, interet: tech_audio}
+  - {site: www.fujifilm-x.com, nom: Fujifilm, interet: tech_audio}
+  # --- Jeux & jouets
+  - {site: www.playmobil.fr, nom: Playmobil, interet: jouets}
+  - {site: www.lagranderecre.fr, nom: La Grande Récré, interet: jouets}
+  - {site: www.toysrus.fr, nom: Toys"R"Us, interet: jouets}
+  - {site: www.ravensburger.fr, nom: Ravensburger, interet: jouets}
+  - {site: www.instant-gaming.com, nom: Instant Gaming, interet: gaming}
+  - {site: www.gamecash.fr, nom: Gamecash, interet: gaming}
+  - {site: www.cdiscount.com, nom: Cdiscount, interet: tech_audio}
+  # --- Sport & outdoor
+  - {site: www.lululemon.fr, nom: lululemon, interet: sport}
+  - {site: www.underarmour.fr, nom: Under Armour, interet: sport}
+  - {site: www.columbiasportswear.fr, nom: Columbia, interet: sport}
+  - {site: www.thenorthface.fr, nom: The North Face, interet: mode_homme}
+  - {site: www.millet.fr, nom: Millet, interet: sport}
+  - {site: www.rossignol.com, nom: Rossignol, interet: sport}
+  - {site: www.lafuma.com, nom: Lafuma, interet: sport}
+  - {site: www.eider.com, nom: Eider, interet: sport}
+  - {site: www.trekkinn.com, nom: Trekkinn, interet: sport}
+  - {site: www.cimalp.fr, nom: Cimalp, interet: sport}
+  - {site: www.picture-organic-clothing.com, nom: Picture, interet: sport}
+  # --- Gourmand & expériences
+  - {site: www.lagrandeepicerie.com, nom: La Grande Épicerie, interet: gourmand}
+  - {site: www.fauchon.com, nom: Fauchon, interet: gourmand}
+  - {site: www.vinatis.com, nom: Vinatis, interet: gourmand}
+  - {site: www.lavinia.fr, nom: Lavinia, interet: gourmand}
+  - {site: www.patrickroger.com, nom: Patrick Roger, interet: gourmand}
+  - {site: www.cluizel.com, nom: Michel Cluizel, interet: gourmand}
+  - {site: www.valrhona.com, nom: Valrhona, interet: gourmand}
+  - {site: www.puyricard.fr, nom: Puyricard, interet: gourmand}
+  - {site: www.neuhauschocolates.com, nom: Neuhaus, interet: gourmand}
+  - {site: www.funbooker.com, nom: Funbooker, interet: experiences}
+  - {site: www.tictactrip.eu, nom: Tictactrip, interet: experiences}
