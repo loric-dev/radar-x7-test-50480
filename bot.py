@@ -207,7 +207,7 @@ class Robots:
 
 
 class Http:
-    def __init__(self, delai: float):
+    def __init__(self, delai: float, timeout: float = 25):
         self.s = requests.Session()
         self.s.headers.update({
             "User-Agent": UA,
@@ -215,6 +215,7 @@ class Http:
             "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.6",
         })
         self.delai = delai
+        self.timeout = timeout
         self._dernier: dict[str, float] = {}
         self.robots = Robots(self.s)
 
@@ -229,7 +230,7 @@ class Http:
                 time.sleep(attente)
             self._dernier[hote] = time.time()
             try:
-                r = self.s.get(url, timeout=25)
+                r = self.s.get(url, timeout=self.timeout)
             except requests.RequestException as e:
                 log(f"  ⚠ réseau ({e.__class__.__name__}) sur {url}")
                 time.sleep(3 * (essai + 1))

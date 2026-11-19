@@ -49,10 +49,10 @@ def _robots_sitemaps(http: bot.Http, base: str) -> list[str]:
 
 
 def tester(e: dict) -> dict:
-    nom = e["nom"]
+    nom = str(e["nom"])  # « On » serait lu comme un booléen par YAML
     base = "https://" + re.sub(r"^https?://", "", e["site"].strip()).rstrip("/")
     res = {"nom": nom, "site": base, "interet": e.get("interet")}
-    http = bot.Http(1.0)
+    http = bot.Http(1.0, timeout=12)
     try:
         r = http.get(base + "/")
     except Exception as ex:  # noqa: BLE001
@@ -140,11 +140,32 @@ def main() -> int:
     with ThreadPoolExecutor(max_workers=args.paralleles) as ex:
         resultats = list(ex.map(tester, a_tester))
 
-    # fusion avec le rapport précédent (mode --nouveaux)
-    par_site = {x["site"]: x for x in (ancien or {}).get("rapport", [])} if args.nouveaux else {}
+    # fusion avec le rapport précédent : une enseigne déjà validée reste validée sur un échec
+    # ponctuel (fiches tirées au hasard, site lent) ; elle n'est retirée que si elle se met à bloquer.
+    precedents = {x["site"]: x for x in (ancien or {}).get("rapport", [])}
+    valides = {}
+    for b in (ancien or {}).get("shopify") or []:
+        valides[b["url"].rstrip("/")] = {"etat": "ok", "type": "shopify", "url": b["url"]}
+    for c in (ancien or {}).get("catalogues") or []:
+        site = "https://" + urlsplit(c["sitemap"]).netloc
+        valides.setdefault(site, {"etat": "ok", "type": "catalogue", "catalogue": c})
+    par_site = dict(precedents) if args.nouveaux else {}
     for r in resultats:
+        ancien_r = precedents.get(r["site"])
+        if r["etat"] != "ok" and not r["etat"].startswith("bloqué") and ancien_r and ancien_r.get("etat") == "ok":
+            garde = valides.get(r["site"]) or valides.get(r["site"].replace("://", "://www."))
+            if garde:
+                par_site[r["site"]] = {**r, **garde}
+                continue
         par_site[r["site"]] = r
-    rapport = sorted(par_site.values(), key=lambda x: (x["etat"] != "ok", x["nom"].lower()))
+    for site, r in list(par_site.items()):  # sites validés auparavant : on garde leur configuration
+        if r.get("etat") == "ok" and "type" not in r:
+            garde = valides.get(site)
+            if garde:
+                par_site[site] = {**r, **garde}
+            else:
+                par_site[site] = {**r, "etat": "à retester"}
+    rapport = sorted(par_site.values(), key=lambda x: (x["etat"] != "ok", str(x["nom"]).lower()))
 
     shopify = [{"nom": r["nom"], "url": r["url"]} for r in rapport if r["etat"] == "ok" and r["type"] == "shopify"]
     catalogues = [r["catalogue"] for r in rapport if r["etat"] == "ok" and r["type"] == "catalogue"]

@@ -280,7 +280,7 @@ enseignes:
   - {site: www.camper.com, nom: Camper, interet: sneakers}
   - {site: www.palladiumboots.fr, nom: Palladium, interet: sneakers}
   - {site: www.reebok.eu, nom: Reebok, interet: sneakers}
-  - {site: www.on.com, nom: On, interet: sneakers}
+  - {site: www.on.com, nom: "On", interet: sneakers}
   - {site: www.saucony.com, nom: Saucony, interet: sneakers}
   - {site: www.veja-store.com, nom: Veja, interet: sneakers}
   # --- Bijoux & montres
