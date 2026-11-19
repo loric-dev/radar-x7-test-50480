@@ -14,6 +14,10 @@ max_alertes_par_passage: 15   # au-delà, les deals suivants arrivent en un seul
 premier_lancement_max: 8      # au tout premier lancement, seulement les 8 meilleurs (pas de spam)
 delai_entre_requetes: 2       # secondes entre deux pages d'un même site (politesse)
 
+# Marques retirées pour tout le monde (le bot ne les lit plus, la page ne les montre plus)
+marques_masquees:
+  - Les Lunes
+
 # Mots qui excluent un deal quel que soit le profil
 exclure_partout:
   - lessive

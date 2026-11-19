@@ -583,7 +583,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     var html = "";
     var tags = [{ nom: "", emoji: "🎁", label: "Tout le monde" }].concat(personnes);
     tags.forEach(function (p) {
-      var list = D.deals.filter(function (d) { return !p.nom || pour(d).indexOf(p.nom) >= 0; });
+      var list = D.deals.filter(function (d) { return !estMasquee(d) && (!p.nom || pour(d).indexOf(p.nom) >= 0); });
       var best = list.reduce(function (m, d) { return Math.max(m, d.red || 0); }, 0);
       var sub = list.length ? (best ? "Jusqu'à −" + best + " %" : "Deals très votés") : "Rien pour l'instant";
       if (p.budget) sub += " · max " + eur(p.budget);
@@ -609,6 +609,9 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     MARQUES[k].n++;
   });
   if (state.marque && state.marque !== "__suivies" && !MARQUES[state.marque]) state.marque = "";
+  var masquees = store.get("radar-masquees", []);
+  if (!Array.isArray(masquees)) masquees = [];
+  function estMasquee(d) { return masquees.indexOf(cleMarque(d.marchand)) >= 0; }
   function remplirMarques() {
     // nombres calculés avec les AUTRES filtres actifs (personne, budget, source, recherche)
     var n = {}, nSuivies = 0, base = D.deals.filter(function (d) { return garde(d, "marque"); });
@@ -625,6 +628,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   function score(d) { return Math.min(d.temp || 0, 2000) / 20 + 2 * (d.red || 0) + (/plus bas|habituel/.test(d.raison || "") ? 40 : 0); }
   function garde(d, sauf) {  // le deal passe-t-il tous les filtres (sauf celui nommé) ?
     var q = sansAccent(state.q.trim()), max = parseFloat(state.max);
+    if (estMasquee(d)) return false;
     if (sauf !== "who" && state.who && pour(d).indexOf(state.who) < 0) return false;
     if (sauf !== "src" && state.src && d.src !== state.src && !(state.src === "LeDénicheur" && d.src === "Surveillance")) return false;
     if (sauf !== "max" && max > 0 && d.prix != null && d.prix > max) return false;
@@ -634,6 +638,11 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
       else if (state.marque && cleMarque(d.marchand) !== state.marque) return false;
     }
     return true;
+  }
+  function varier(list) {  // chaque nouvel article d'une même marque recule un peu
+    var vus = {};
+    list.forEach(function (d) { var k = cleMarque(d.marchand); d._s = score(d) - 30 * (vus[k] || 0); vus[k] = (vus[k] || 0) + 1; });
+    return list.sort(function (a, b) { return b._s - a._s; });
   }
   function filtered() {
     var list = D.deals.filter(function (d) { return garde(d); });
@@ -645,7 +654,8 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
       prix: function (a, b) { return (a.prix == null ? 1e9 : a.prix) - (b.prix == null ? 1e9 : b.prix); },
       recent: function (a, b) { return (b.publie || b.vu) - (a.publie || a.vu); }
     }[state.tri] || function () { return 0; };
-    return list.sort(key);
+    list.sort(key);
+    return state.tri === "score" && !state.marque ? varier(list) : list;
   }
   function card(d) {
     var initial = esc((d.marchand || d.titre || "?").trim().charAt(0).toUpperCase());
@@ -703,10 +713,14 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     if (parseFloat(state.max) > 0) f.push(["max", "Budget ≤ " + eur(parseFloat(state.max))]);
     if (state.src) f.push(["src", "Source : " + (NOMS_SRC[state.src] || state.src)]);
     if (state.q.trim()) f.push(["q", "Recherche : « " + state.q.trim() + " »"]);
-    $("actifs").hidden = !f.length;
-    $("actifs").innerHTML = f.length ? "Filtres actifs :" + f.map(function (x) {
+    var masquer = state.marque && state.marque !== "__suivies"
+      ? '<button type="button" class="raz" data-masquer="' + esc(state.marque) + '">Masquer cette marque</button>' : "";
+    var reafficher = masquees.length
+      ? '<button type="button" class="raz" data-reafficher="1">Réafficher les marques masquées (' + masquees.length + ')</button>' : "";
+    $("actifs").hidden = !f.length && !reafficher;
+    $("actifs").innerHTML = (f.length ? "Filtres actifs :" + f.map(function (x) {
       return '<button type="button" class="f" data-retirer-filtre="' + x[0] + '" title="Retirer ce filtre">' + esc(x[1]) + ' <span aria-hidden="true">×</span></button>';
-    }).join("") + (f.length > 1 ? '<button type="button" class="raz" data-retirer-filtre="tout">Tout effacer</button>' : "") : "";
+    }).join("") + (f.length > 1 ? '<button type="button" class="raz" data-retirer-filtre="tout">Tout effacer</button>' : "") : "") + masquer + reafficher;
   }
   function retirerFiltre(k) {
     if (k === "who" || k === "tout") state.who = "";
@@ -742,7 +756,12 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     $("more").hidden = list.length <= state.shown;
     $("more").textContent = "Afficher plus (" + (list.length - state.shown) + ")";
   }
-  $("actifs").addEventListener("click", function (e) { var b = e.target.closest("[data-retirer-filtre]"); if (b) retirerFiltre(b.getAttribute("data-retirer-filtre")); });
+  $("actifs").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-retirer-filtre]"); if (b) { retirerFiltre(b.getAttribute("data-retirer-filtre")); return; }
+    var m = e.target.closest("[data-masquer]");
+    if (m) { masquees.push(m.getAttribute("data-masquer")); store.set("radar-masquees", masquees); state.marque = ""; save(); renderMust(); renderPeople(); renderDeals(); return; }
+    if (e.target.closest("[data-reafficher]")) { masquees = []; store.set("radar-masquees", masquees); renderMust(); renderPeople(); renderDeals(); }
+  });
   function onCardClick(e) {
     var rf = e.target.closest("[data-retirer-filtre]");
     if (rf) { retirerFiltre(rf.getAttribute("data-retirer-filtre")); return; }
@@ -1028,7 +1047,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   /* À ne pas rater : les meilleurs deals signalés ces 3 derniers jours */
   function renderMust() {
     var now = Date.now() / 1000;
-    var list = D.deals.filter(function (d) { return d.alerte && now - d.alerte < 3 * 86400; })
+    var list = D.deals.filter(function (d) { return d.alerte && now - d.alerte < 3 * 86400 && !estMasquee(d); })
       .sort(function (a, b) { return score(b) - score(a); });
     var parM = {};
     list = list.filter(function (d) { var m = d.marchand || d.src; parM[m] = (parM[m] || 0) + 1; return parM[m] <= 2; }).slice(0, 10);

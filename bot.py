@@ -1507,6 +1507,8 @@ def generer_tableau(cfg: dict, etat: dict, chemin: Path, artifact: bool = False)
     tableau = etat.setdefault("tableau", {})
     for k in [k for k, v in tableau.items() if maintenant - v.get("maj", 0) > 7 * JOUR]:
         del tableau[k]
+    for k in [k for k, v in tableau.items() if marque_masquee(v.get("marchand", ""), cfg)]:
+        del tableau[k]
     deals = [{"id": k, **v} for k, v in tableau.items()]
 
     surveilles = []
@@ -1565,6 +1567,19 @@ def generer_tableau(cfg: dict, etat: dict, chemin: Path, artifact: bool = False)
 # ==========================================================================
 # Enseignes découvertes automatiquement (outils/decouvrir_enseignes.py)
 # ==========================================================================
+def marque_masquee(nom: str, cfg: dict) -> bool:
+    n = normaliser(nom).strip()
+    return bool(n) and any(normaliser(m).strip() == n for m in cfg.get("marques_masquees") or [])
+
+
+def appliquer_masquage(cfg: dict) -> None:
+    """Retire des sources les marques masquées (marques_masquees dans config.yaml)."""
+    shop = (cfg.get("marchands") or {}).get("shopify") or {}
+    shop["boutiques"] = [b for b in shop.get("boutiques") or [] if not marque_masquee(b.get("nom", ""), cfg)]
+    cats = cfg.get("catalogues") or {}
+    cats["sites"] = [c for c in cats.get("sites") or [] if not marque_masquee(c.get("nom", ""), cfg)]
+
+
 def fusionner_enseignes(cfg: dict, chemin: Path = ROOT / "data" / "enseignes.yaml") -> None:
     """Ajoute à la config les boutiques Shopify et catalogues détectés comme lisibles."""
     if not chemin.exists():
@@ -1610,6 +1625,7 @@ def main() -> int:
 
     cfg = yaml.safe_load(Path(args.config).read_text(encoding="utf-8")) or {}
     fusionner_enseignes(cfg)
+    appliquer_masquage(cfg)
     notif = Notifieur(args.dry_run)
     log(f"[{datetime.now():%d/%m %H:%M}] Canaux d'alerte : {', '.join(notif.canaux()) or 'aucun (console uniquement)'}")
     if args.test:
@@ -1648,7 +1664,7 @@ def main() -> int:
     tableau = etat.setdefault("tableau", {})
     alertes: list[Alerte] = []
     for d in deals:
-        if d.expire:
+        if d.expire or marque_masquee(d.marchand, cfg):
             tableau.pop(d.id, None)
             continue
         if d.source == "Dealabs":
