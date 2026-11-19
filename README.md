@@ -10,7 +10,7 @@ Le bot repère les vrais gros deals (mode, beauté, maison, high-tech, jeux, jou
 |---|---|
 | **À ne pas rater** | Les meilleurs deals des 3 derniers jours, 2 par marque au maximum pour varier. |
 | **Pour qui ?** | Une tuile par personne avec son nombre de deals. Touche-la pour ne voir que ses idées. **✎ Mes personnes** pour les créer et les modifier, **Partager** pour envoyer tes personnes et ta sélection. |
-| **Ma sélection** | Les produits que tu as gardés avec « ♡ Garder », rangés par personne, avec le **total à prévoir**. Un message t'avertit si un produit n'est plus en promo, ou s'il a encore baissé. Elle est enregistrée sur ton appareil. |
+| **Mes coups de cœur ♥** | Les produits mis de côté avec « ♡ Coup de cœur ». Pour chacun : **pour qui** (menu), **Acheté ✓** (case à cocher), et le total par personne (déjà acheté / reste à acheter). Tri par personne, par prix ou par date, et option pour masquer les achats. Bouton « Partager mes coups de cœur ». Un message t'avertit si un produit n'est plus en promo, ou s'il a encore baissé. Elle est enregistrée sur ton appareil. |
 | **Tous les deals** | Recherche, budget max, tri (meilleurs, plus grosse baisse, plus votés, prix, récents) et filtre par source. Le badge **Nouveau** signale ce qui est apparu depuis ta dernière visite. |
 | **Produits surveillés** | Les produits dont tu suis le prix : prix du jour, plus bas prix vu, ton prix cible et la courbe. |
 | **Baisses en cours** | Les produits LeDénicheur dont le prix vient de baisser. |

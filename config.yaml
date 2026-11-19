@@ -154,7 +154,7 @@ centres_interet:
     mots_cles: [calendrier de l avent]
     groupes: ["ldn:calendriers-de-lavent"]
   - id: coup_de_coeur
-    nom: Coups de cœur (très votés)
+    nom: Top deals (très votés)
     emoji: "⭐"
     # posée automatiquement sur les deals énormes (voir le profil « Coup de cœur »)
 
@@ -205,7 +205,7 @@ profils:
     exclure: [ampoule, voiture]
 
   # Les deals « monstres » (très votés) dans les catégories cadeaux
-  - nom: Coup de cœur
+  - nom: Top deals
     emoji: "⭐"
     budget_max: 300
     interets: [coup_de_coeur]
