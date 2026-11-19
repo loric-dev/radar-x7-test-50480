@@ -262,8 +262,40 @@ def _reduction(prix, ref, titre="", pct=None) -> int | None:
     return int(m.group(1)) if m else None
 
 
+def _deal_dealabs(t: dict, groupe: str | None) -> Deal:
+    """Transforme les données d'un bon plan Dealabs (JSON de la page) en Deal."""
+    prix = t.get("price") or None
+    ref = t.get("nextBestPrice") or None
+    img = t.get("mainImage") or {}
+    image = (f"{IMG_CDN}/{img['path']}/{img['name']}/re/300x300/qt/60/{img['name']}.jpg"
+             if img.get("path") and img.get("name") else None)
+    groupes = {groupe} if groupe else set()
+    mg = (t.get("mainGroup") or {}).get("threadGroupUrlName")
+    if mg:
+        groupes.add(mg)
+    for g in t.get("groupsPath") or []:  # page d'un bon plan : catégories en chemin
+        if isinstance(g, dict) and g.get("threadGroupUrlName"):
+            groupes.add(g["threadGroupUrlName"])
+    return Deal(
+        id=f"dealabs:{t['threadId']}",
+        titre=(t.get("title") or "").strip(),
+        url=f"{DEALABS}/bons-plans/{t.get('titleSlug', 'deal')}-{t['threadId']}",
+        source="Dealabs",
+        prix=prix, prix_ref=ref,
+        reduction=_reduction(prix, ref, t.get("title"), t.get("percentage")),
+        temperature=float(t.get("temperature") or 0),
+        marchand=(t.get("merchant") or {}).get("merchantName") or t.get("linkHost") or "",
+        image=image,
+        publie=float(t.get("publishedAt") or 0),
+        groupes=groupes,
+        code_promo=(t.get("voucherCode") or "").strip(),
+        livraison_gratuite=bool((t.get("shipping") or {}).get("isFree")),
+        expire=bool(t.get("isExpired")) or t.get("status") not in (None, "Activated"),
+    )
+
+
 def parser_pages_dealabs(page_html: str, groupe: str | None) -> list[Deal]:
-    """Deals présents dans une page Dealabs (données JSON embarquées)."""
+    """Deals présents dans une page de liste Dealabs (données JSON embarquées)."""
     deals = []
     for a, b in _VUE_RE.findall(page_html):
         try:
@@ -271,34 +303,41 @@ def parser_pages_dealabs(page_html: str, groupe: str | None) -> list[Deal]:
         except ValueError:
             continue
         t = (data.get("props") or {}).get("thread")
-        if not t or not t.get("threadId"):
-            continue
-        prix = t.get("price") or None
-        ref = t.get("nextBestPrice") or None
-        img = t.get("mainImage") or {}
-        image = (f"{IMG_CDN}/{img['path']}/{img['name']}/re/300x300/qt/60/{img['name']}.jpg"
-                 if img.get("path") and img.get("name") else None)
-        groupes = {groupe} if groupe else set()
-        mg = (t.get("mainGroup") or {}).get("threadGroupUrlName")
-        if mg:
-            groupes.add(mg)
-        deals.append(Deal(
-            id=f"dealabs:{t['threadId']}",
-            titre=(t.get("title") or "").strip(),
-            url=f"{DEALABS}/bons-plans/{t.get('titleSlug', 'deal')}-{t['threadId']}",
-            source="Dealabs",
-            prix=prix, prix_ref=ref,
-            reduction=_reduction(prix, ref, t.get("title"), t.get("percentage")),
-            temperature=float(t.get("temperature") or 0),
-            marchand=(t.get("merchant") or {}).get("merchantName") or t.get("linkHost") or "",
-            image=image,
-            publie=float(t.get("publishedAt") or 0),
-            groupes=groupes,
-            code_promo=(t.get("voucherCode") or "").strip(),
-            livraison_gratuite=bool((t.get("shipping") or {}).get("isFree")),
-            expire=bool(t.get("isExpired")) or t.get("status") not in (None, "Activated"),
-        ))
+        if t and t.get("threadId"):
+            deals.append(_deal_dealabs(t, groupe))
     return deals
+
+
+def parser_page_deal(page_html: str, ident: str, groupe: str | None) -> Deal | None:
+    """Le bon plan principal d'une page « bons-plans/… » (données dans window.__INITIAL_STATE__)."""
+    for d in parser_pages_dealabs(page_html, groupe):
+        if d.id == f"dealabs:{ident}":
+            return d
+    i = page_html.find("window.__INITIAL_STATE__")
+    j = page_html.find("{", i) if i >= 0 else -1
+    if j < 0:
+        return None
+    try:
+        etat, _ = json.JSONDecoder(strict=False).raw_decode(page_html, j)
+    except ValueError:
+        return None
+    trouve: list[dict] = []
+
+    def chercher(o):
+        if trouve:
+            return
+        if isinstance(o, dict):
+            if str(o.get("threadId")) == str(ident) and "temperature" in o and "title" in o:
+                trouve.append(o)
+                return
+            for v in o.values():
+                chercher(v)
+        elif isinstance(o, list):
+            for v in o:
+                chercher(v)
+
+    chercher(etat)
+    return _deal_dealabs(trouve[0], groupe) if trouve else None
 
 
 def parser_rss_dealabs(xml_txt: str, groupe: str) -> list[Deal]:
@@ -421,12 +460,11 @@ def collecter_dealabs(http: Http, cfg: dict, etat: dict, profils: list[dict]) ->
         r = http.get(c["url"])
         if r is None or r.status_code != 200:
             continue
-        for d in parser_pages_dealabs(r.text, c.get("groupe")):
-            if d.id == k:
-                ajouter(d)
-                if d.expire:
-                    del candidats[k]
-                break
+        d = parser_page_deal(r.text, k.split(":")[1], c.get("groupe"))
+        if d:
+            ajouter(d)
+            if d.expire:
+                del candidats[k]
     log(f"  Dealabs : {len(candidats)} nouveautés en suivi, {min(len(a_verifier), dcfg.get('max_pages_deal_par_passage', 25))} vérifiées")
     return list(tous.values())
 
