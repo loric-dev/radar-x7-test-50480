@@ -240,6 +240,8 @@ dealabs:
     - {marque: Zara, page: zara, interets: [mode_femme, mode_homme]}
     - {marque: H&M, page: hm, interets: [mode_femme, mode_homme]}
     - {marque: Mango, page: mango, interets: [mode_femme]}
+    - {marque: COS, interets: [mode_femme, mode_homme]}
+    - {marque: Arket, interets: [mode_femme, mode_homme]}
     - {marque: Sézane, interets: [mode_femme]}
     - {marque: Kiabi, page: kiabi, interets: [mode_femme, mode_homme]}
     - {marque: Jules, page: jules, interets: [mode_homme]}
