@@ -1,0 +1,1031 @@
+# Généré par outils/decouvrir_enseignes.py — ne pas modifier à la main.
+# 35 boutiques Shopify, 57 catalogues, 117 non lisibles.
+shopify:
+- nom: A.P.C.
+  url: https://www.apc.fr
+- nom: AMI Paris
+  url: https://www.amiparis.com
+- nom: André
+  url: https://www.andre.fr
+- nom: Armor-Lux
+  url: https://www.armorlux.com
+- nom: Aubade
+  url: https://aubade.com
+- nom: Audo
+  url: https://audocph.com
+- nom: Cluse
+  url: https://cluse.com
+- nom: Cyrillus
+  url: https://cyrillus.fr
+- nom: Daniel Wellington
+  url: https://www.danielwellington.com
+- nom: Devred
+  url: https://devred.com
+- nom: Diptyque
+  url: https://diptyqueparis.com
+- nom: Eden Park
+  url: https://www.eden-park.com
+- nom: Filorga
+  url: https://int.filorga.com
+- nom: Fleux
+  url: https://www.fleux.com
+- nom: Flying Tiger
+  url: https://flyingtiger.com
+- nom: Isabel Marant
+  url: https://isabelmarant.com
+- nom: Izipizi
+  url: https://www.izipizi.com
+- nom: La Chaise Longue
+  url: https://www.lachaiselongue.fr
+- nom: Ladurée
+  url: https://laduree.com
+- nom: Lancaster
+  url: https://www.lancaster.com
+- nom: Lancel
+  url: https://lancel.com
+- nom: Le Petit Ballon
+  url: https://www.lepetitballon.com
+- nom: Le Tanneur
+  url: https://www.letanneur.com
+- nom: Les Lunes
+  url: https://leslunes.com
+- nom: Mathon
+  url: https://www.mathon.fr
+- nom: Mephisto
+  url: https://www.mephisto.com
+- nom: Merci
+  url: https://merci-merci.com
+- nom: Nuxe
+  url: https://www.nuxe.com
+- nom: Patine
+  url: https://www.patine.fr
+- nom: Payot
+  url: https://www.payot.com
+- nom: Sarah Lavoine
+  url: https://www.maisonsarahlavoine.com
+- nom: Seasonly
+  url: https://seasonly.fr
+- nom: Sœur
+  url: https://www.soeur.fr
+- nom: Teddy Smith
+  url: https://www.teddy-smith.com
+- nom: Tediber
+  url: https://www.tediber.com
+catalogues:
+- nom: Agatha
+  sitemap: https://www.agatha.fr/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: American Vintage
+  sitemap: https://www.americanvintage-store.com/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Atmosphera
+  sitemap: https://www.atmosphera.com/fr/sitemap/sitemap-index_1-fr.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: ba&sh
+  sitemap: https://ba-sh.com/be/fr/sitemap-0-product-fr_BE.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Birkenstock
+  sitemap: https://www.birkenstock.com/sitemap_index.xml
+  par_passage: 30
+  filtre: /fr([-_][a-z]{2})?(/|$)
+- nom: Bose
+  sitemap: https://www.bose.fr/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Brice
+  sitemap: https://www.jules.com/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Cristel
+  sitemap: https://www.cristel.com/sitemap_index_fr.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Cuisine Addict
+  sitemap: https://www.cuisineaddict.com/1_index_sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Cult Beauty
+  sitemap: https://www.cultbeauty.com/sitemapindex-product.xml.gz
+  par_passage: 30
+- nom: De'Longhi
+  sitemap: https://www.delonghi.com/fr-be/sitemap-fr-be-sitemap-index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Ekosport
+  sitemap: https://www.ekosport.fr/sitemap_fr.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Eram
+  sitemap: https://www.eram.fr/media/google_sitemap_2.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Etam
+  sitemap: http://www.etam.fr/sitemap_index.xml
+  par_passage: 30
+- nom: Fatboy
+  sitemap: https://www.fatboy.com/ch-en/sitemap_index.xml
+  par_passage: 30
+  filtre: /fr([-_][a-z]{2})?(/|$)
+- nom: Foot Locker
+  sitemap: https://www.footlocker.fr/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Fragonard
+  sitemap: https://www.fragonard.com/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: ghd
+  sitemap: https://www.ghdhair.com/sitemap-index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Ginette NY
+  sitemap: https://www.ginette-ny.com/sitemap/sitemap_eu_fr.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Grain de Malice
+  sitemap: https://www.graindemalice.fr/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+  filtre: /fr([-_][a-z]{2})?(/|$)
+- nom: Gérard Darel
+  sitemap: https://gerarddarel.com/sitemap.xml
+  par_passage: 30
+- nom: Histoire d'Or
+  sitemap: https://www.histoiredor.com/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Jeff de Bruges
+  sitemap: https://www.jeff-de-bruges.com/Assets/Rbs/Seo/sitemap-index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: KitchenAid
+  sitemap: https://www.kitchenaid.fr/sitemap/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: La Maison du Chocolat
+  sitemap: https://www.lamaisonduchocolat.com/pub/media/sitemap/sitemap_fr_FR.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: La Maison du Whisky
+  sitemap: https://www.whisky.fr/media/sitemap/sitemap_whimag.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: LDLC
+  sitemap: https://www.ldlc.com/fr-be/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Le Creuset
+  sitemap: https://www.lecreuset.fr/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Le Labo
+  sitemap: https://www.lelabofragrances.com/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Les Georgettes
+  sitemap: https://www.lesgeorgettes.com/sitemap_index.xml
+  par_passage: 30
+  filtre: /fr([-_][a-z]{2})?(/|$)
+- nom: Linvosges
+  sitemap: https://www.linvosges.com/rss/sitemap_img_fr_FR.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Longchamp
+  sitemap: https://www.longchamp.com/be/fr/sitemap-stmp_fr_BE_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Maison Baluchon
+  sitemap: https://maisonbaluchon.fr/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Maison Kitsuné
+  sitemap: https://maisonkitsune.com/media/sitemap/sitemap_fr_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Marc Orian
+  sitemap: https://www.marc-orian.com/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Maty
+  sitemap: https://www.maty.com/sitemap.xml
+  par_passage: 30
+- nom: Monoprix
+  sitemap: https://www.monoprix.fr/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Nicolas
+  sitemap: https://www.nicolas.com/fr/fr/sitemap/sitemap-index_1-fr.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Peugeot Saveurs
+  sitemap: https://fr.peugeot-saveurs.com/sitemaps/sitemap_fr.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Pharmashopi
+  sitemap: https://www.pharmashopi.com/sitemap/sitemap.xml
+  par_passage: 30
+- nom: Philibert
+  sitemap: https://www.philibertnet.com/sitemaps/sitemap_1.xml
+  par_passage: 30
+  filtre: /fr([-_][a-z]{2})?(/|$)
+- nom: Puma
+  sitemap: https://eu.puma.com/sitemaps/urls/eu/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Rituals
+  sitemap: https://www.rituals.com/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Rue du Commerce
+  sitemap: https://www.rueducommerce.fr/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Sandro
+  sitemap: https://us.sandro-paris.com/sitemap_index.xml
+  par_passage: 30
+- nom: Sarenza
+  sitemap: https://www.sarenza.com/fr/fr/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Sessùn
+  sitemap: https://fr.sessun.com/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Smartbox
+  sitemap: https://www.smartbox.com/fr/experiences-a-vivre/sitemap-fr.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Smeg
+  sitemap: https://www.smeg.com/fr/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Snipes
+  sitemap: https://www.snipesusa.com/sitemap_index.xml
+  par_passage: 30
+- nom: Sonos
+  sitemap: https://www.sonos.com/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Space NK
+  sitemap: https://www.spacenk.com/sitemap_index.xml
+  par_passage: 30
+- nom: Suncoo
+  sitemap: https://www.suncoo-paris.com/sitemap/sitemap-index_1-en.xml
+  par_passage: 30
+- nom: Superdry
+  sitemap: https://www.superdry.fr/sitemap_index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: The Kooples
+  sitemap: https://www.thekooples.com/fr/fr/sitemap/sitemap-index_1-fr.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Typology
+  sitemap: https://www.typology.com/sitemap.xml
+  par_passage: 30
+  filtre_sitemap: fr
+- nom: Zadig & Voltaire
+  sitemap: https://zadig-et-voltaire.com/sitemap-index.xml
+  par_passage: 30
+  filtre_sitemap: fr
+interets:
+  mode_femme:
+  - A.P.C.
+  - American Vintage
+  - Aubade
+  - ba&sh
+  - Cyrillus
+  - Etam
+  - Grain de Malice
+  - Gérard Darel
+  - Isabel Marant
+  - Les Lunes
+  - Monoprix
+  - Patine
+  - Sandro
+  - Sessùn
+  - Suncoo
+  - Sœur
+  - The Kooples
+  - Zadig & Voltaire
+  sacs_bijoux:
+  - Agatha
+  - Ginette NY
+  - Histoire d'Or
+  - Izipizi
+  - Lancaster
+  - Lancel
+  - Le Tanneur
+  - Les Georgettes
+  - Longchamp
+  - Marc Orian
+  - Maty
+  mode_homme:
+  - AMI Paris
+  - Armor-Lux
+  - Brice
+  - Devred
+  - Eden Park
+  - Maison Kitsuné
+  - Superdry
+  - Teddy Smith
+  sneakers:
+  - André
+  - Birkenstock
+  - Eram
+  - Foot Locker
+  - Mephisto
+  - Puma
+  - Sarenza
+  - Snipes
+  maison_deco:
+  - Atmosphera
+  - Audo
+  - Fatboy
+  - Fleux
+  - Flying Tiger
+  - La Chaise Longue
+  - Linvosges
+  - Maison Baluchon
+  - Merci
+  - Sarah Lavoine
+  - Tediber
+  tech_audio:
+  - Bose
+  - LDLC
+  - Rue du Commerce
+  - Sonos
+  montres:
+  - Cluse
+  - Daniel Wellington
+  cuisine:
+  - Cristel
+  - Cuisine Addict
+  - De'Longhi
+  - KitchenAid
+  - Le Creuset
+  - Mathon
+  - Peugeot Saveurs
+  - Smeg
+  maquillage:
+  - Cult Beauty
+  - Space NK
+  soins:
+  - Diptyque
+  - Filorga
+  - Nuxe
+  - Payot
+  - Pharmashopi
+  - Rituals
+  - Seasonly
+  - Typology
+  sport:
+  - Ekosport
+  parfum_femme:
+  - Fragonard
+  - Le Labo
+  cheveux:
+  - ghd
+  gourmand:
+  - Jeff de Bruges
+  - La Maison du Chocolat
+  - La Maison du Whisky
+  - Ladurée
+  - Le Petit Ballon
+  - Nicolas
+  jouets:
+  - Philibert
+  experiences:
+  - Smartbox
+rapport:
+- nom: A.P.C.
+  site: https://www.apc.fr
+  etat: ok
+- nom: Agatha
+  site: https://www.agatha.fr
+  etat: ok
+- nom: American Vintage
+  site: https://www.americanvintage-store.com
+  etat: ok
+- nom: AMI Paris
+  site: https://www.amiparis.com
+  etat: ok
+- nom: André
+  site: https://www.andre.fr
+  etat: ok
+- nom: Armor-Lux
+  site: https://www.armorlux.com
+  etat: ok
+- nom: Atmosphera
+  site: https://www.atmosphera.com
+  etat: ok
+- nom: Aubade
+  site: https://www.aubade.fr
+  etat: ok
+- nom: Audo
+  site: https://www.audocph.com
+  etat: ok
+- nom: ba&sh
+  site: https://www.ba-sh.com
+  etat: ok
+- nom: Birkenstock
+  site: https://www.birkenstock.com
+  etat: ok
+- nom: Bose
+  site: https://www.bose.fr
+  etat: ok
+- nom: Brice
+  site: https://www.brice.fr
+  etat: ok
+- nom: Cluse
+  site: https://www.cluse.com
+  etat: ok
+- nom: Cristel
+  site: https://www.cristel.com
+  etat: ok
+- nom: Cuisine Addict
+  site: https://www.cuisineaddict.com
+  etat: ok
+- nom: Cult Beauty
+  site: https://www.cultbeauty.com
+  etat: ok
+- nom: Cyrillus
+  site: https://www.cyrillus.fr
+  etat: ok
+- nom: Daniel Wellington
+  site: https://www.danielwellington.com
+  etat: ok
+- nom: De'Longhi
+  site: https://www.delonghi.com
+  etat: ok
+- nom: Devred
+  site: https://www.devred.com
+  etat: ok
+- nom: Diptyque
+  site: https://www.diptyqueparis.com
+  etat: ok
+- nom: Eden Park
+  site: https://www.eden-park.com
+  etat: ok
+- nom: Ekosport
+  site: https://www.ekosport.fr
+  etat: ok
+- nom: Eram
+  site: https://www.eram.fr
+  etat: ok
+- nom: Etam
+  site: https://www.etam.com
+  etat: ok
+- nom: Fatboy
+  site: https://www.fatboy.com
+  etat: ok
+- nom: Filorga
+  site: https://www.filorga.com
+  etat: ok
+- nom: Fleux
+  site: https://www.fleux.com
+  etat: ok
+- nom: Flying Tiger
+  site: https://www.flyingtiger.com
+  etat: ok
+- nom: Foot Locker
+  site: https://www.footlocker.fr
+  etat: ok
+- nom: Fragonard
+  site: https://www.fragonard.com
+  etat: ok
+- nom: ghd
+  site: https://www.ghdhair.com
+  etat: ok
+- nom: Ginette NY
+  site: https://www.ginette-ny.com
+  etat: ok
+- nom: Grain de Malice
+  site: https://www.graindemalice.fr
+  etat: ok
+- nom: Gérard Darel
+  site: https://www.gerarddarel.com
+  etat: ok
+- nom: Histoire d'Or
+  site: https://www.histoiredor.com
+  etat: ok
+- nom: Isabel Marant
+  site: https://www.isabelmarant.com
+  etat: ok
+- nom: Izipizi
+  site: https://www.izipizi.com
+  etat: ok
+- nom: Jeff de Bruges
+  site: https://www.jeff-de-bruges.com
+  etat: ok
+- nom: KitchenAid
+  site: https://www.kitchenaid.fr
+  etat: ok
+- nom: La Chaise Longue
+  site: https://www.lachaiselongue.fr
+  etat: ok
+- nom: La Maison du Chocolat
+  site: https://www.lamaisonduchocolat.com
+  etat: ok
+- nom: La Maison du Whisky
+  site: https://www.whisky.fr
+  etat: ok
+- nom: Ladurée
+  site: https://www.laduree.fr
+  etat: ok
+- nom: Lancaster
+  site: https://www.lancaster.fr
+  etat: ok
+- nom: Lancel
+  site: https://www.lancel.com
+  etat: ok
+- nom: LDLC
+  site: https://www.ldlc.com
+  etat: ok
+- nom: Le Creuset
+  site: https://www.lecreuset.fr
+  etat: ok
+- nom: Le Labo
+  site: https://www.lelabofragrances.com
+  etat: ok
+- nom: Le Petit Ballon
+  site: https://www.lepetitballon.com
+  etat: ok
+- nom: Le Tanneur
+  site: https://www.letanneur.com
+  etat: ok
+- nom: Les Georgettes
+  site: https://www.lesgeorgettes.com
+  etat: ok
+- nom: Les Lunes
+  site: https://www.leslunes.com
+  etat: ok
+- nom: Linvosges
+  site: https://www.linvosges.com
+  etat: ok
+- nom: Longchamp
+  site: https://www.longchamp.com
+  etat: ok
+- nom: Maison Baluchon
+  site: https://www.maisonbaluchon.fr
+  etat: ok
+- nom: Maison Kitsuné
+  site: https://www.maisonkitsune.com
+  etat: ok
+- nom: Marc Orian
+  site: https://www.marc-orian.fr
+  etat: ok
+- nom: Mathon
+  site: https://www.mathon.fr
+  etat: ok
+- nom: Maty
+  site: https://www.maty.com
+  etat: ok
+- nom: Mephisto
+  site: https://www.mephisto.com
+  etat: ok
+- nom: Merci
+  site: https://www.merci-merci.com
+  etat: ok
+- nom: Monoprix
+  site: https://www.monoprix.fr
+  etat: ok
+- nom: Nicolas
+  site: https://www.nicolas.com
+  etat: ok
+- nom: Nuxe
+  site: https://www.nuxe.com
+  etat: ok
+- nom: Patine
+  site: https://www.patine.fr
+  etat: ok
+- nom: Payot
+  site: https://www.payot.com
+  etat: ok
+- nom: Peugeot Saveurs
+  site: https://www.peugeot-saveurs.com
+  etat: ok
+- nom: Pharmashopi
+  site: https://www.pharmashopi.com
+  etat: ok
+- nom: Philibert
+  site: https://www.philibertnet.com
+  etat: ok
+- nom: Puma
+  site: https://eu.puma.com
+  etat: ok
+- nom: Rituals
+  site: https://www.rituals.com
+  etat: ok
+- nom: Rue du Commerce
+  site: https://www.rueducommerce.fr
+  etat: ok
+- nom: Sandro
+  site: https://www.sandro-paris.com
+  etat: ok
+- nom: Sarah Lavoine
+  site: https://www.maisonsarahlavoine.com
+  etat: ok
+- nom: Sarenza
+  site: https://www.sarenza.com
+  etat: ok
+- nom: Seasonly
+  site: https://www.seasonly.fr
+  etat: ok
+- nom: Sessùn
+  site: https://www.sessun.com
+  etat: ok
+- nom: Smartbox
+  site: https://www.smartbox.com
+  etat: ok
+- nom: Smeg
+  site: https://www.smeg.com
+  etat: ok
+- nom: Snipes
+  site: https://www.snipes.com
+  etat: ok
+- nom: Sonos
+  site: https://www.sonos.com
+  etat: ok
+- nom: Space NK
+  site: https://www.spacenk.com
+  etat: ok
+- nom: Suncoo
+  site: https://www.suncoo-paris.com
+  etat: ok
+- nom: Superdry
+  site: https://www.superdry.fr
+  etat: ok
+- nom: Sœur
+  site: https://www.soeur.fr
+  etat: ok
+- nom: Teddy Smith
+  site: https://www.teddysmith.com
+  etat: ok
+- nom: Tediber
+  site: https://www.tediber.com
+  etat: ok
+- nom: The Kooples
+  site: https://www.thekooples.com
+  etat: ok
+- nom: Typology
+  site: https://www.typology.com
+  etat: ok
+- nom: Zadig & Voltaire
+  site: https://zadig-et-voltaire.com
+  etat: ok
+- nom: 1.2.3
+  site: https://www.123-paris.com
+  etat: injoignable
+- nom: 1001 Pharmacies
+  site: https://www.1001pharmacies.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Absolution
+  site: https://www.absolution-cosmetics.com
+  etat: Shopify en USD (ignoré)
+- nom: Aigle
+  site: https://www.aigle.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Alice Délice
+  site: https://www.alice-delice.com
+  etat: injoignable
+- nom: Alice à Paris
+  site: https://www.aliceapart.com
+  etat: injoignable
+- nom: Alltricks
+  site: https://www.alltricks.fr
+  etat: bloqué (403)
+- nom: Asics
+  site: https://www.asics.com
+  etat: bloqué (403)
+- nom: Atelier Privé
+  site: https://www.atelierprivé.com
+  etat: injoignable
+- nom: Au Vieux Campeur
+  site: https://www.auvieuxcampeur.fr
+  etat: bloqué (403)
+- nom: Back Market
+  site: https://www.backmarket.fr
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Bash
+  site: https://www.bash.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Beaubleu
+  site: https://www.beaubleu.fr
+  etat: injoignable
+- nom: Benefit
+  site: https://www.benefitcosmetics.com
+  etat: bloqué (403)
+- nom: Blanc des Vosges
+  site: https://www.blancdesvosges.fr
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Bouchara
+  site: https://www.bouchara.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Boulanger
+  site: https://www.boulanger.com
+  etat: injoignable
+- nom: Buly 1803
+  site: https://www.officine-universelle-buly.com
+  etat: injoignable
+- nom: Byredo
+  site: https://www.byredo.com
+  etat: injoignable
+- nom: Carhartt WIP
+  site: https://www.carhartt-wip.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Caroll
+  site: https://www.caroll.com
+  etat: bloqué (403)
+- nom: Carré Blanc
+  site: https://www.carreblanc.com
+  etat: bloqué (403)
+- nom: Castorama
+  site: https://www.castorama.fr
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Caudalie
+  site: https://fr.caudalie.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Charlotte Tilbury
+  site: https://www.charlottetilbury.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Clarins
+  site: https://www.clarins.fr
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Comptoir des Cotonniers
+  site: https://www.comptoirdescotonniers.com
+  etat: bloqué (403)
+- nom: Converse
+  site: https://www.converse.com
+  etat: bloqué (403)
+- nom: Cosmetic Pharmacie
+  site: https://www.cosmeticpharmacie.com
+  etat: injoignable
+- nom: Cuisse de Grenouille
+  site: https://www.cuissedegrenouille.com
+  etat: Shopify en USD (ignoré)
+- nom: Cultura
+  site: https://www.cultura.com
+  etat: bloqué (403)
+- nom: Des Petits Hauts
+  site: https://www.desptitshauts.com
+  etat: injoignable
+- nom: Dockers
+  site: https://www.dockers.fr
+  etat: injoignable
+- nom: Dr. Martens
+  site: https://www.drmartens.com
+  etat: bloqué (403)
+- nom: Dyson
+  site: https://www.dyson.fr
+  etat: bloqué (403)
+- nom: Easypara
+  site: https://www.easyparapharmacie.com
+  etat: bloqué (403)
+- nom: Embryolisse
+  site: https://www.embryolisse.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Feelunique
+  site: https://www.feelunique.com
+  etat: bloqué (403)
+- nom: Foreo
+  site: https://www.foreo.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Fossil
+  site: https://www.fossil.com
+  etat: bloqué (403)
+- nom: Garancia
+  site: https://www.garancia.fr
+  etat: injoignable
+- nom: Garmin
+  site: https://www.garmin.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Go Sport
+  site: https://www.go-sport.com
+  etat: erreur 402
+- nom: GoPro
+  site: https://gopro.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: HAY
+  site: https://www.hay.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: HEMA
+  site: https://www.hema.com
+  etat: bloqué (403)
+- nom: Hoka
+  site: https://www.hoka.com
+  etat: bloqué (403)
+- nom: Huda Beauty
+  site: https://www.huda-beauty.fr
+  etat: injoignable
+- nom: i-Run
+  site: https://www.i-run.fr
+  etat: bloqué (403)
+- nom: Intersport
+  site: https://www.intersport.fr
+  etat: bloqué (403)
+- nom: Izac
+  site: https://www.izac.fr
+  etat: Shopify en USD (ignoré)
+- nom: Jacquemus
+  site: https://www.jacquemus.com
+  etat: bloqué (403)
+- nom: JBL
+  site: https://fr.jbl.com
+  etat: bloqué (403)
+- nom: Jeanne Damas
+  site: https://www.jeanne-damas.com
+  etat: injoignable
+- nom: Jo Malone
+  site: https://www.jo-malone.fr
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: JouéClub
+  site: https://www.joueclub.fr
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Jérôme Dreyfuss
+  site: https://www.jerome-dreyfuss.com
+  etat: Shopify en USD (ignoré)
+- nom: K-Way
+  site: https://www.k-way.com
+  etat: Shopify en USD (ignoré)
+- nom: Kaporal
+  site: https://www.kaporal.com
+  etat: injoignable
+- nom: Kickers
+  site: https://www.kickers.com
+  etat: injoignable
+- nom: Kiko
+  site: https://www.kikocosmetics.com
+  etat: Shopify en USD (ignoré)
+- nom: King Jouet
+  site: https://www.king-jouet.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Kérastase
+  site: https://www.kerastase.fr
+  etat: bloqué (403)
+- nom: L'Occitane
+  site: https://fr.loccitane.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: La Petite Épicerie
+  site: https://www.lapetiteepicerie.fr
+  etat: injoignable
+- nom: La Rosée
+  site: https://www.larosee-cosmetiques.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Le Chocolat Alain Ducasse
+  site: https://www.alain.ducasse-chocolat.com
+  etat: injoignable
+- nom: Le Coq Sportif
+  site: https://www.lecoqsportif.com
+  etat: Shopify en USD (ignoré)
+- nom: Le Slip Français
+  site: https://www.lesliptfrancais.fr
+  etat: injoignable
+- nom: Leroy Merlin
+  site: https://www.leroymerlin.fr
+  etat: bloqué (403)
+- nom: Lingerie Sans Complexe
+  site: https://www.lingerie-sans-complexe.com
+  etat: injoignable
+- nom: LIP
+  site: https://www.lipwatch.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Lyfe
+  site: https://www.lyfestyle-shop.fr
+  etat: injoignable
+- nom: Mademoiselle Saint Germain
+  site: https://www.mademoiselle-saint-germain.com
+  etat: injoignable
+- nom: Maison Cléo
+  site: https://www.maisoncleo.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: ManoMano
+  site: https://www.manomano.fr
+  etat: bloqué (403)
+- nom: March LA.B
+  site: https://www.march-lab.com
+  etat: Shopify en USD (ignoré)
+- nom: Marshall
+  site: https://www.marshall.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Materiel.net
+  site: https://www.materiel.net
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Micromania
+  site: https://www.micromania.fr
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Minelli
+  site: https://www.minelli.fr
+  etat: erreur 423
+- nom: Muuto
+  site: https://www.muuto.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Mypharmacie
+  site: https://www.mypharmacie-beaute.com
+  etat: injoignable
+- nom: Médecine Douce
+  site: https://www.medecinedouce.com
+  etat: injoignable
+- nom: Napapijri
+  site: https://www.napapijri.fr
+  etat: erreur 400
+- nom: Nature & Découvertes
+  site: https://www.natureetdecouvertes.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Nespresso
+  site: https://www.nespresso.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: New Balance
+  site: https://www.newbalance.fr
+  etat: bloqué (403)
+- nom: Normann Copenhagen
+  site: https://www.normann-copenhagen.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: NYX
+  site: https://www.nyxcosmetics.fr
+  etat: bloqué (403)
+- nom: Olow
+  site: https://www.olow.fr
+  etat: Shopify en USD (ignoré)
+- nom: Oxybul
+  site: https://www.oxybul.com
+  etat: bloqué (403)
+- nom: Pa Design
+  site: https://www.pa-design.com
+  etat: injoignable
+- nom: Patagonia
+  site: https://www.patagonia.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Pierre Hermé
+  site: https://www.pierreherme.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Polaroid
+  site: https://www.polaroid.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Princesse tam.tam
+  site: https://www.princessetamtam.com
+  etat: bloqué (403)
+- nom: Repetto
+  site: https://www.repetto.fr
+  etat: Shopify en USD (ignoré)
+- nom: Saint James
+  site: https://www.saint-james.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Salomon
+  site: https://www.salomon.com
+  etat: bloqué (403)
+- nom: San Marina
+  site: https://www.sanmarina.fr
+  etat: injoignable
+- nom: Schott
+  site: https://www.schott-nyc.com
+  etat: injoignable
+- nom: Serge Blanco
+  site: https://www.serge-blanco.com
+  etat: injoignable
+- nom: Simone Pérèle
+  site: https://www.simone-perele.com
+  etat: Shopify en USD (ignoré)
+- nom: Smyths Toys
+  site: https://www.smythstoys.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Snowleader
+  site: https://www.snowleader.com
+  etat: bloqué (403)
+- nom: Spartoo
+  site: https://www.spartoo.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Staub
+  site: https://www.staub.fr
+  etat: injoignable
+- nom: Sézane
+  site: https://www.mysezane.com
+  etat: injoignable
+- nom: Søstrene Grene
+  site: https://www.sostrenegrene.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Timberland
+  site: https://www.timberland.fr
+  etat: bloqué (403)
+- nom: UGG
+  site: https://www.ugg.com
+  etat: bloqué (403)
+- nom: Vanessa Bruno
+  site: https://www.vanessabruno.com
+  etat: prix illisibles (chargés après coup ou plan du site absent)
+- nom: Vans
+  site: https://www.vans.fr
+  etat: bloqué (403)
+- nom: Weber
+  site: https://www.weber.com
+  etat: Shopify en USD (ignoré)
+- nom: Wonderbox
+  site: https://www.wonderbox.fr
+  etat: bloqué (403)
+- nom: Zôdio
+  site: https://www.zodio.fr
+  etat: injoignable

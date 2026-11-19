@@ -1,0 +1,438 @@
+# ============================================================================
+#  Bot deals Noël / Black Friday : configuration
+#  Tu peux modifier ce fichier librement (mots-clés, budgets, seuils…).
+# ============================================================================
+
+# --- Ce qu'on appelle un « gros deal » (valeurs par défaut, chaque profil peut les changer)
+seuils:
+  temperature_min: 150        # Dealabs : deal très voté par la communauté (100° = déjà bien, 500° = énorme)
+  reduction_min: 30           # ou au moins -30 % vs le prix habituel…
+  temperature_plancher: 30    # …à condition qu'au moins quelques personnes l'aient validé (évite les fausses promos)
+  age_max_jours: 14           # ignore les deals publiés il y a plus de 14 jours
+
+max_alertes_par_passage: 15   # au-delà, les deals suivants arrivent en un seul message récapitulatif
+premier_lancement_max: 8      # au tout premier lancement, seulement les 8 meilleurs (pas de spam)
+delai_entre_requetes: 2       # secondes entre deux pages d'un même site (politesse)
+
+# Mots qui excluent un deal quel que soit le profil
+exclure_partout:
+  - lessive
+  - adoucissant
+  - papier toilette
+  - couche
+  - croquette
+  - litiere
+  - pneu
+  - huile moteur
+  - carburant
+  - assurance
+  - forfait
+  - abonnement
+  - echantillon
+  - carte sim
+  - reconditionne      # retire cette ligne si le reconditionné te va
+
+# ============================================================================
+#  CENTRES D'INTÉRÊT : des étiquettes posées sur chaque deal.
+#  Sur la page, chacun crée ses personnes en cochant ces centres d'intérêt
+#  (aucun compte nécessaire). Un deal reçoit une étiquette si l'un de ses
+#  mots_cles est présent, s'il vient d'un des groupes (catégories Dealabs ou
+#  « ldn:<catégorie LeDénicheur> »), ou d'un des marchands.
+#  « palette + fards » = les 2 mots présents. Accents, majuscules, pluriels ignorés.
+# ============================================================================
+centres_interet:
+  - id: parfum_femme
+    nom: Parfum femme
+    emoji: "🌸"
+    mots_cles: [parfum + femme, eau de parfum + femme, coffret + parfum + femme, Chanel + parfum, Dior + parfum, Lancome, Yves Saint Laurent + parfum, Guerlain, Mugler, Armani + femme, Narciso Rodriguez, Paco Rabanne + femme]
+  - id: parfum_homme
+    nom: Parfum homme
+    emoji: "🧴"
+    mots_cles: [parfum + homme, eau de toilette + homme, eau de parfum + homme, Bleu de Chanel, Sauvage, Le Male, Azzaro, Hugo Boss + parfum, Paco Rabanne + homme, Armani + homme, Stronger With You]
+  - id: maquillage
+    nom: Maquillage
+    emoji: "💄"
+    mots_cles: [maquillage, palette + fards, palette + yeux, mascara, rouge a levres, fond de teint, gloss, Charlotte Tilbury, Benefit, Fenty, Rare Beauty, NARS, Too Faced, Urban Decay, MAC Cosmetics, Huda Beauty, Kiko]
+    groupes: [maquillage, "ldn:palette-de-fards-a-paupiere", "ldn:rouges-a-levres", "ldn:fonds-de-teint"]
+    marchands: [Kiko]
+  - id: soins
+    nom: Soins & beauté
+    emoji: "🧖"
+    mots_cles: [serum, creme + visage, soin + visage, coffret + soin, coffret beaute, Caudalie, Clarins, Nuxe, The Ordinary, Typology, Estee Lauder, Kiehl s, La Roche Posay, Laneige, Drunk Elephant, Rituals, L Occitane]
+    groupes: [beaute, "ldn:serums-visage", "ldn:cremes-visage", "ldn:coffrets-cadeaux"]
+    marchands: [Oh My Cream, Respire, Gisou, Lookfantastic, Sephora, Nocibé, Marionnaud, Notino, Yves Rocher]
+  - id: cheveux
+    nom: Cheveux & beauté tech
+    emoji: "💇"
+    mots_cles: [Airwrap, Dyson + seche, Dyson + cheveux, GHD, lisseur, boucleur, Babyliss, seche cheveux, lumiere pulsee, brosse a dents + electrique, Oral B]
+    groupes: ["ldn:lisseurs-boucleurs", "ldn:coiffure", "ldn:epilateurs-a-lumiere-pulsee", "ldn:brosses-a-dents-electriques"]
+  - id: rasage
+    nom: Rasage & barbe
+    emoji: "🪒"
+    mots_cles: [rasoir, tondeuse + barbe, tondeuse + cheveux, OneBlade, Braun Series, Philips + rasoir]
+    groupes: ["ldn:rasoir-electrique", "ldn:tondeuses-cheveux"]
+  - id: mode_femme
+    nom: Mode femme
+    emoji: "👗"
+    mots_cles: [robe, jupe, blouse, cardigan, pull + femme, manteau + femme, veste + femme, jean + femme, lingerie, bottines + femme, Sezane, Ba sh]
+    groupes: [lingerie]
+    marchands: [Rouje, Make My Lemonade, Balzac Paris, Musier Paris, Polène, Maje, Etam, Undiz, Pimkie, Kookaï, Sézane]
+  - id: mode_homme
+    nom: Mode homme
+    emoji: "👔"
+    mots_cles: [pull + homme, chemise + homme, jean + homme, veste + homme, doudoune + homme, manteau + homme, sweat + homme, hoodie, Levi s, Lacoste, Ralph Lauren, Tommy Hilfiger, Carhartt, The North Face, Hugo Boss]
+    marchands: [Bonne Gueule, Hast]
+  - id: sneakers
+    nom: Sneakers & chaussures
+    emoji: "👟"
+    mots_cles: [sneakers, baskets, Air Max, Air Force, Jordan, New Balance, Adidas + chaussure, Nike + chaussure, Converse, Veja, Puma + chaussure, Asics, Salomon, bottines, boots]
+    groupes: [sneakers, chaussures, "ldn:sneakers-baskets", "ldn:bottines-et-boots"]
+  - id: sacs_bijoux
+    nom: Sacs & bijoux
+    emoji: "👜"
+    mots_cles: [sac a main, sac + bandouliere, Longchamp, Polene, bijou, collier, bracelet, boucles d oreilles, bague, Pandora, Swarovski, foulard, echarpe, cachemire]
+    groupes: [bijoux, bagagerie, "ldn:sacs-a-main-sacs-en-bandouliere"]
+    marchands: [Polène, Cabaïa]
+  - id: montres
+    nom: Montres
+    emoji: "⌚"
+    mots_cles: [montre, Seiko, Casio, Garmin, Apple Watch, Tissot, Fossil]
+    groupes: [montres, "ldn:montre", "ldn:montres-connectees"]
+  - id: gaming
+    nom: Jeux vidéo
+    emoji: "🎮"
+    mots_cles: [PS5, PlayStation, Xbox, Nintendo Switch, Switch 2, manette, jeu + PS5, jeu + Switch, jeu + Xbox, casque gamer, casque + gaming, clavier + gaming, souris + gaming, EA Sports FC, Zelda, Mario]
+    groupes: [jeux-video, consoles-jeux-video, "ldn:consoles-jeux", "ldn:jeux-ps5", "ldn:jeux-nintendo-switch-2"]
+    marchands: [Nintendo]
+  - id: tech_audio
+    nom: Tech & audio
+    emoji: "🎧"
+    mots_cles: [AirPods, ecouteurs, casque + Sony, casque + Bose, casque + reduction de bruit, JBL, Marshall, enceinte, Kindle, liseuse, iPad, tablette, Polaroid, Instax, platine vinyle, appareil photo]
+    groupes: [high-tech, "ldn:casque-audio", "ldn:enceinte-portable", "ldn:lecteurs-de-livres-numeriques", "ldn:tablette-tactile", "ldn:tourne-disques"]
+  - id: maison_deco
+    nom: Maison & déco
+    emoji: "🛋️"
+    mots_cles: [lampe, luminaire, lampadaire, suspension, fauteuil, chaise, tabouret, table basse, table de chevet, etagere, miroir, tapis, coussin, plaid, vase, bougie, canape, pouf, buffet]
+    groupes: [maison-habitat, "ldn:canapes"]
+    marchands: [Sklum, Kave Home, IKEA, Westwing, Drawer, Miliboo, Ferm Living, Caravane, House Doctor, Maison Labiche, Maisons du Monde, La Redoute, AM.PM, Habitat, Zara Home]
+  - id: cuisine
+    nom: Cuisine & café
+    emoji: "☕"
+    mots_cles: [Le Creuset, Staub, Nespresso, machine a cafe, expresso, Thermomix, airfryer, robot + cuisine, KitchenAid, Moulinex, Smeg, cocotte, couteau + cuisine]
+    groupes: ["ldn:machines-a-expresso", "ldn:airfryer-friteuses-traditionnelle"]
+  - id: jouets
+    nom: Lego, jouets & jeux
+    emoji: "🧸"
+    mots_cles: [Lego, Playmobil, jeu de societe, puzzle, jouet, peluche, Duplo]
+    groupes: [lego, jouets, jeux-de-societe, "ldn:jeux-de-societe"]
+  - id: bricolage
+    nom: Bricolage & barbecue
+    emoji: "🔧"
+    mots_cles: [perceuse, visseuse, Makita, Ryobi, Dewalt, Bosch + perceuse, caisse a outils, outil, barbecue, Weber, plancha]
+  - id: gourmand
+    nom: Vins & gourmandises
+    emoji: "🍾"
+    mots_cles: [champagne, whisky, rhum, vin, chocolat, coffret + gourmand, foie gras, cafe en grains]
+    groupes: [champagne, vins]
+  - id: sport
+    nom: Sport & plein air
+    emoji: "🏃"
+    mots_cles: [running, velo, fitness, yoga, randonnee, sac a dos, gourde, Stanley, Garmin + Forerunner, Hoka]
+    groupes: [sports-plein-air, "ldn:chaussures-de-running"]
+  - id: experiences
+    nom: Sorties & expériences
+    emoji: "✈️"
+    mots_cles: [week end, Smartbox, Wonderbox, sejour, coffret + experience, concert, spectacle, escape game]
+    groupes: [voyages]
+  - id: avent
+    nom: Calendriers de l'avent
+    emoji: "🎄"
+    mots_cles: [calendrier de l avent]
+    groupes: ["ldn:calendriers-de-lavent"]
+  - id: coup_de_coeur
+    nom: Coups de cœur (très votés)
+    emoji: "⭐"
+    # posée automatiquement sur les deals énormes (voir le profil « Coup de cœur »)
+
+# ============================================================================
+#  LES PERSONNES PROPOSÉES PAR DÉFAUT
+#  Sur la page, chaque visiteur part de cette liste et peut la modifier, en
+#  ajouter ou en supprimer (enregistré dans son navigateur, sans compte).
+#  Elles servent aussi au bot pour choisir les deals « À ne pas rater ».
+#  - interets : ids de la liste ci-dessus
+#  - mots_cles : idées en plus (facultatif) ; exclure : mots à écarter
+#  - budget_max / budget_min en euros
+# ============================================================================
+profils:
+  - nom: Maman
+    emoji: "👩"
+    budget_max: 150
+    interets: [parfum_femme, soins, cheveux, sacs_bijoux, cuisine, maison_deco, experiences]
+    exclure: [homme, enfant, bebe]
+
+  - nom: Papa
+    emoji: "👨"
+    budget_max: 150
+    interets: [parfum_homme, rasage, montres, mode_homme, bricolage, gourmand, tech_audio]
+    exclure: [femme, enfant, bebe]
+
+  - nom: Sœurs
+    emoji: "👯‍♀️"
+    budget_max: 120
+    interets: [maquillage, soins, parfum_femme, cheveux, mode_femme, sacs_bijoux, sneakers, avent]
+    exclure: [homme, enfant, bebe]
+
+  - nom: Frère
+    emoji: "🧢"
+    budget_max: 150
+    interets: [gaming, sneakers, mode_homme, tech_audio, sport, parfum_homme, rasage]
+    exclure: [femme, fille, bebe]
+
+  - nom: Copain / Copine
+    emoji: "❤️"
+    budget_max: 200
+    interets: [parfum_femme, parfum_homme, sacs_bijoux, sneakers, tech_audio, experiences, gaming]
+    exclure: [enfant, bebe]
+
+  - nom: Maison & déco
+    emoji: "🛋️"
+    budget_max: 800
+    interets: [maison_deco, cuisine]
+    exclure: [ampoule, voiture]
+
+  # Les deals « monstres » (très votés) dans les catégories cadeaux
+  - nom: Coup de cœur
+    emoji: "⭐"
+    budget_max: 300
+    interets: [coup_de_coeur]
+    seuils:
+      temperature_min: 600
+      reduction_min: 50
+      temperature_plancher: 200
+    groupes: [parfums, maquillage, beaute, bijoux, montres, cadeaux, lego, jeux-de-societe, jouets]
+    tous: true      # pas de filtre de centres d'intérêt, seulement les catégories ci-dessus
+
+# ============================================================================
+#  SOURCE 1 : Dealabs (communauté, couvre Sephora, Nocibé, Zalando, Fnac…)
+#  « groupes » = catégories Dealabs (l'adresse https://www.dealabs.com/groupe/<nom>)
+# ============================================================================
+dealabs:
+  actif: true
+  page_hot: true                     # page des deals les plus chauds du moment
+  pages_groupe_toutes_les_heures: 3  # pages « top du mois » de chaque catégorie
+  suivi_nouveautes_heures: 48        # durée de suivi de la température d'un nouveau deal
+  max_pages_deal_par_passage: 40
+  groupes:
+    # Mode
+    - mode-accessoires
+    - chaussures
+    - sneakers
+    - manteaux
+    - lingerie
+    - bijoux
+    - montres
+    - bagagerie
+    # Beauté
+    - beaute
+    - parfums
+    - maquillage
+    - sante-et-cosmetiques
+    # Cadeaux, loisirs, tech
+    - cadeaux
+    - high-tech
+    - jeux-video
+    - lego
+    - jouets
+    - jeux-de-societe
+    - electromenager
+    - maison-habitat
+    - champagne
+
+# ============================================================================
+#  SOURCE 2 : LeDénicheur (comparateur : Sephora, Nocibé, Marionnaud, Zalando,
+#  Fnac, Darty, Amazon… sur une même fiche, avec 3 mois d'historique de prix)
+#  « categories » = l'adresse https://ledenicheur.fr/c/<nom>
+# ============================================================================
+ledenicheur:
+  actif: true
+  toutes_les_heures: 3               # fréquence de parcours des catégories
+  reduction_min: 20                 # -20 % sous le prix habituel des 3 derniers mois (vrai historique, pas un prix barré)
+  historique_par_passage: 30        # fiches produit lues par passage pour connaître le prix habituel (3 mois)
+  historique_valable_jours: 5       # relecture de l'historique d'un produit tous les 5 jours
+  baisse_pour_verifier: 12          # baisse (%) qui fait relire l'historique en priorité
+  categories:
+    # Beauté
+    - parfum
+    - coffrets-cadeaux
+    - palette-de-fards-a-paupiere
+    - rouges-a-levres
+    - fonds-de-teint
+    - serums-visage
+    - cremes-visage
+    - lisseurs-boucleurs
+    - coiffure
+    - epilateurs-a-lumiere-pulsee
+    - rasoir-electrique
+    - tondeuses-cheveux
+    - brosses-a-dents-electriques
+    # Mode
+    - sneakers-baskets
+    - sacs-a-main-sacs-en-bandouliere
+    - bottines-et-boots
+    - vestes
+    - montre
+    - lunettes-de-soleil
+    - valises
+    # Tech & loisirs
+    - montres-connectees
+    - casque-audio
+    - enceinte-portable
+    - lecteurs-de-livres-numeriques
+    - tablette-tactile
+    - consoles-jeux
+    - jeux-ps5
+    - jeux-nintendo-switch-2
+    - jeux-de-societe
+    - tourne-disques
+    # Maison
+    - machines-a-expresso
+    - airfryer-friteuses-traditionnelle
+    - calendriers-de-lavent
+    - canapes
+
+# ============================================================================
+#  SOURCE 3 : pages soldes des marchands, lues directement
+#  (Nike met ses produits soldés directement dans sa page ; la plupart des autres
+#   sites chargent leurs prix après coup ou bloquent les robots : ils passent par
+#   Dealabs et LeDénicheur)
+# ============================================================================
+marchands:
+  max_par_marchand: 12              # les N plus grosses réductions de chaque marque (évite qu'une marque inonde la page)
+  prix_min: 20                      # ignore les petits accessoires (patchs, échantillons…)
+  nike:
+    actif: true
+    toutes_les_heures: 2
+    reduction_min: 30               # niveau habituel des soldes Nike ; les 12 plus grosses réductions sont gardées
+    pages:                          # https://www.nike.com/fr/w/<page>
+      - promotions-3yaep
+      - hommes-promotions-3yaepznik1
+      - femmes-promotions-3yaepz5e1x6
+      - promotions-chaussures-3yaepzy7ok
+
+  # Boutiques Shopify : leur catalogue public indique le prix barré de chaque article
+  shopify:
+    actif: true
+    toutes_les_heures: 3
+    reduction_min: 30
+    pages_max: 4                    # 250 produits par page
+    boutiques:
+      # Mode femme
+      - {nom: Rouje, url: "https://www.rouje.com"}
+      - {nom: Make My Lemonade, url: "https://www.makemylemonade.com"}
+      - {nom: Balzac Paris, url: "https://www.balzac-paris.fr"}
+      - {nom: Musier Paris, url: "https://www.musier-paris.com"}
+      - {nom: Polène, url: "https://www.polene-paris.com"}
+      - {nom: Cabaïa, url: "https://cabaia.com"}
+      - {nom: Pimkie, url: "https://www.pimkie.fr"}
+      - {nom: Kookaï, url: "https://www.kookai.fr"}
+      # Beauté
+      - {nom: Oh My Cream, url: "https://www.ohmycream.com"}
+      - {nom: Respire, url: "https://respire.co"}
+      - {nom: Gisou, url: "https://www.gisou.com"}
+      # Homme
+      - {nom: Bonne Gueule, url: "https://bonnegueule.fr"}
+      - {nom: Hast, url: "https://hast.fr"}
+      # Maison
+      - {nom: Ferm Living, url: "https://www.fermliving.fr"}
+      - {nom: Maison Labiche, url: "https://maisonlabiche.com"}
+      - {nom: Caravane, url: "https://www.caravane.fr"}
+      - {nom: House Doctor, url: "https://www.housedoctor.com"}
+
+  # (ajoutés : catalogue entier surveillé, utile pour le Black Friday)
+  # Pages promo décrites en schema.org (prix + prix barré dans la page)
+  pages_promo:
+    actif: true
+    toutes_les_heures: 3
+    reduction_min: 25
+    pages:
+      # Sklum : Black November, « Special Price » et catégories (les 50 premiers produits de chaque page)
+      - {nom: Sklum, url: "https://www.sklum.com/fr/26463-acheter-black-november", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/11716-acheter-special-price", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/11722-acheter-special-price-chaises", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/11732-acheter-special-price-accessoires", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/617-acheter-tabouret", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/589-acheter-meubles-salle-a-manger", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/543-acheter-chaises", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/4767-acheter-meuble-bois", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/12299-acheter-entrees", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/2572-acheter-mobilier-de-bureau", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/524-acheter-mobilier", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/593-acheter-meuble-chambre", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/523-acheter-eclairage", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/591-acheter-meubles-salle-de-bains", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/590-acheter-meubles-de-cuisine", max: 20}
+      - {nom: Sklum, url: "https://www.sklum.com/fr/771-acheter-decoration", max: 20}
+
+# ============================================================================
+#  SOURCE 3 bis : CATALOGUES COMPLETS
+#  Le bot lit le plan du site (sitemap) de chaque enseigne et parcourt toutes
+#  ses fiches produit, à tour de rôle (par_passage fiches à chaque passage,
+#  tous les sites en même temps). Il repère :
+#   - les prix barrés indiqués dans la fiche (ex. Sklum) ;
+#   - les baisses par rapport aux prix qu'il a lui-même relevés.
+#  Pour ajouter un site : son plan du site est indiqué dans <site>/robots.txt
+#  (ligne « Sitemap: »).
+# ============================================================================
+catalogues:
+  actif: true
+  par_passage: 60                   # fiches lues par site et par passage (1 toutes les 2 s)
+  reduction_min: 25                 # prix barré : -25 % minimum
+  baisse_historique: 20             # sinon : -20 % sous le prix relevé par le bot
+  max_par_site: 40                  # au plus 40 promos affichées par site
+  sites:
+    # Maison & meubles
+    - {nom: Sklum, sitemap: "https://www.sklum.com/fr/img/core/skl/feed/sitemaps/index_sitemap_skl_fr.xml",
+       filtre: "/fr/acheter-[a-z0-9-]+/[0-9]+-", par_passage: 100, max: 80}
+    - {nom: IKEA, sitemap: "https://www.ikea.com/sitemaps/sitemap.xml", filtre_sitemap: "prod-fr-FR_",
+       filtre: "/fr/fr/p/", par_passage: 80}
+    - {nom: Westwing, sitemap: "https://www.westwing.fr/sitemap-products.xml", par_passage: 100}
+    - {nom: Drawer, sitemap: "https://www.drawer.fr/sitemap_1_products.xml"}
+    - {nom: Miliboo, sitemap: "https://www.miliboo.com/sitemap/sitemap_produits_fr.xml"}
+    # Mode & beauté
+    - {nom: Maje, sitemap: "https://fr.maje.com/sitemap_0-product.xml"}
+    - {nom: Etam, sitemap: "https://www.etam.com/sitemap_0-product.xml"}
+    - {nom: Undiz, sitemap: "https://www.undiz.com/sitemap_0-product.xml"}
+    - {nom: Lookfantastic, sitemap: "https://www.lookfantastic.fr/sitemapindex-product.xml.gz", par_passage: 100}
+
+# ============================================================================
+#  SOURCE 5 : comptes X (Twitter) de bons plans, via l'API officielle de X
+#  Il faut une clé d'API X (secret GitHub X_BEARER_TOKEN, voir README).
+#  Sans clé, cette source est simplement ignorée.
+#  - pour : profils à qui attribuer d'office les posts (sinon : profils trouvés
+#    par mots-clés, ou « Tout le monde »)
+# ============================================================================
+reseaux:
+  x:
+    actif: true
+    toutes_les_heures: 1            # 1 appel par compte et par heure (seuls les nouveaux posts sont lus)
+    garder_jours: 4                 # durée d'affichage d'un post
+    comptes:
+      - {pseudo: Caminotv, pour: []}
+
+# ============================================================================
+#  SOURCE 4 : tes produits précis à surveiller
+#  Le plus simple : bouton « Suivre le prix » / « Suivre un produit » sur la page
+#  (crée une demande GitHub que le bot lit ; la fermer arrête le suivi).
+#  Tu peux aussi les lister ici :
+#  - url : une fiche LeDénicheur (recommandé : tous les marchands + historique)
+#          ou la fiche du site marchand (marche si le site l'autorise, ex.
+#          Clarins, Caudalie, Kiko, Typology, Etam, Lookfantastic, Rituals…)
+#  - prix_cible : alerte dès que le prix passe dessous (facultatif)
+#  - pour : profils concernés
+# ============================================================================
+surveillance: []
+  # Exemple (enlève les # et remplace les [] ci-dessus par la liste) :
+  # - nom: "Dyson Airwrap"
+  #   url: "https://ledenicheur.fr/product.php?p=XXXXXXX"
+  #   prix_cible: 400
+  #   pour: [Sœurs]

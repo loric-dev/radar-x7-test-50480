@@ -1,0 +1,59 @@
+name: Radar cadeaux
+
+# Tourne tout seul sur les serveurs de GitHub, même ordinateur éteint.
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # toutes les 30 min (GitHub peut décaler de quelques minutes)
+  workflow_dispatch:          # bouton « Run workflow » pour lancer un passage à la main
+
+permissions:
+  contents: write             # pour enregistrer la page et la mémoire du bot
+  issues: read                # pour lire les produits à suivre ajoutés depuis la page
+
+concurrency:
+  group: radar-cadeaux
+  cancel-in-progress: false
+
+jobs:
+  passage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # Mémoire des catalogues complets (plusieurs Mo) : gardée dans le cache GitHub, pas dans le dépôt
+      - name: Récupérer la mémoire des catalogues
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: catalogues-${{ github.run_id }}
+          restore-keys: catalogues-
+
+      - name: Chercher les deals et mettre à jour la page
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}       # fourni par GitHub : lit les demandes de suivi
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}   # facultatif : active la lecture des comptes X
+        run: python bot.py
+
+      - name: Sauvegarder la mémoire des catalogues
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: cache
+          key: catalogues-${{ github.run_id }}
+
+      - name: Enregistrer
+        run: |
+          git config user.name "radar-cadeaux"
+          git config user.email "radar-cadeaux@users.noreply.github.com"
+          git add data/etat.json docs/index.html
+          git diff --staged --quiet || git commit -m "passage $(date -u +%Y-%m-%dT%H:%MZ)" -q
+          git pull --rebase -q -X theirs || true
+          git push -q

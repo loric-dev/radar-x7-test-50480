@@ -1,0 +1,226 @@
+# ============================================================================
+#  Enseignes à tester automatiquement (outil « Découvrir des enseignes »).
+#  Ajoute une ligne : {site: exemple.fr, nom: Exemple, interet: mode_femme}
+#  puis lance l'action GitHub « Découvrir des enseignes » : les sites lisibles
+#  sont ajoutés tout seuls au bot (fichier data/enseignes.yaml).
+#  interet = un id de « centres_interet » (config.yaml).
+# ============================================================================
+enseignes:
+  # --- Mode femme
+  - {site: www.ba-sh.com, nom: ba&sh, interet: mode_femme}
+  - {site: www.sandro-paris.com, nom: Sandro, interet: mode_femme}
+  - {site: www.thekooples.com, nom: The Kooples, interet: mode_femme}
+  - {site: zadig-et-voltaire.com, nom: Zadig & Voltaire, interet: mode_femme}
+  - {site: www.apc.fr, nom: A.P.C., interet: mode_femme}
+  - {site: www.isabelmarant.com, nom: Isabel Marant, interet: mode_femme}
+  - {site: www.vanessabruno.com, nom: Vanessa Bruno, interet: mode_femme}
+  - {site: www.gerarddarel.com, nom: Gérard Darel, interet: mode_femme}
+  - {site: www.comptoirdescotonniers.com, nom: Comptoir des Cotonniers, interet: mode_femme}
+  - {site: www.princessetamtam.com, nom: Princesse tam.tam, interet: mode_femme}
+  - {site: www.caroll.com, nom: Caroll, interet: mode_femme}
+  - {site: www.123-paris.com, nom: 1.2.3, interet: mode_femme}
+  - {site: www.graindemalice.fr, nom: Grain de Malice, interet: mode_femme}
+  - {site: www.desptitshauts.com, nom: Des Petits Hauts, interet: mode_femme}
+  - {site: www.americanvintage-store.com, nom: American Vintage, interet: mode_femme}
+  - {site: www.jacquemus.com, nom: Jacquemus, interet: mode_femme}
+  - {site: www.sessun.com, nom: Sessùn, interet: mode_femme}
+  - {site: www.leslunes.com, nom: Les Lunes, interet: mode_femme}
+  - {site: www.patine.fr, nom: Patine, interet: mode_femme}
+  - {site: www.maisoncleo.com, nom: Maison Cléo, interet: mode_femme}
+  - {site: www.jeanne-damas.com, nom: Jeanne Damas, interet: mode_femme}
+  - {site: www.soeur.fr, nom: Sœur, interet: mode_femme}
+  - {site: www.suncoo-paris.com, nom: Suncoo, interet: mode_femme}
+  - {site: www.bash.com, nom: Bash, interet: mode_femme}
+  - {site: www.monoprix.fr, nom: Monoprix, interet: mode_femme}
+  - {site: www.cyrillus.fr, nom: Cyrillus, interet: mode_femme}
+  - {site: www.etam.com, nom: Etam, interet: mode_femme}
+  - {site: www.lingerie-sans-complexe.com, nom: Lingerie Sans Complexe, interet: mode_femme}
+  - {site: www.aubade.fr, nom: Aubade, interet: mode_femme}
+  - {site: www.simone-perele.com, nom: Simone Pérèle, interet: mode_femme}
+  # --- Mode homme
+  - {site: www.cuissedegrenouille.com, nom: Cuisse de Grenouille, interet: mode_homme}
+  - {site: www.saint-james.com, nom: Saint James, interet: mode_homme}
+  - {site: www.armorlux.com, nom: Armor-Lux, interet: mode_homme}
+  - {site: www.lesliptfrancais.fr, nom: Le Slip Français, interet: mode_homme}
+  - {site: www.maisonkitsune.com, nom: Maison Kitsuné, interet: mode_homme}
+  - {site: www.amiparis.com, nom: AMI Paris, interet: mode_homme}
+  - {site: www.brice.fr, nom: Brice, interet: mode_homme}
+  - {site: www.devred.com, nom: Devred, interet: mode_homme}
+  - {site: www.izac.fr, nom: Izac, interet: mode_homme}
+  - {site: www.superdry.fr, nom: Superdry, interet: mode_homme}
+  - {site: www.carhartt-wip.com, nom: Carhartt WIP, interet: mode_homme}
+  - {site: www.patagonia.com, nom: Patagonia, interet: sport}
+  - {site: www.napapijri.fr, nom: Napapijri, interet: mode_homme}
+  - {site: www.timberland.fr, nom: Timberland, interet: sneakers}
+  - {site: www.teddysmith.com, nom: Teddy Smith, interet: mode_homme}
+  - {site: www.kaporal.com, nom: Kaporal, interet: mode_homme}
+  - {site: www.lecoqsportif.com, nom: Le Coq Sportif, interet: sneakers}
+  - {site: www.k-way.com, nom: K-Way, interet: mode_homme}
+  - {site: www.olow.fr, nom: Olow, interet: mode_homme}
+  - {site: www.atelierprivé.com, nom: Atelier Privé, interet: mode_homme}
+  - {site: www.dockers.fr, nom: Dockers, interet: mode_homme}
+  - {site: www.schott-nyc.com, nom: Schott, interet: mode_homme}
+  - {site: www.aigle.com, nom: Aigle, interet: mode_homme}
+  - {site: www.eden-park.com, nom: Eden Park, interet: mode_homme}
+  - {site: www.serge-blanco.com, nom: Serge Blanco, interet: mode_homme}
+  # --- Chaussures & sneakers
+  - {site: www.repetto.fr, nom: Repetto, interet: sneakers}
+  - {site: www.eram.fr, nom: Eram, interet: sneakers}
+  - {site: www.minelli.fr, nom: Minelli, interet: sneakers}
+  - {site: www.sanmarina.fr, nom: San Marina, interet: sneakers}
+  - {site: www.andre.fr, nom: André, interet: sneakers}
+  - {site: www.kickers.com, nom: Kickers, interet: sneakers}
+  - {site: www.newbalance.fr, nom: New Balance, interet: sneakers}
+  - {site: www.asics.com, nom: Asics, interet: sneakers}
+  - {site: eu.puma.com, nom: Puma, interet: sneakers}
+  - {site: www.vans.fr, nom: Vans, interet: sneakers}
+  - {site: www.converse.com, nom: Converse, interet: sneakers}
+  - {site: www.hoka.com, nom: Hoka, interet: sneakers}
+  - {site: www.salomon.com, nom: Salomon, interet: sneakers}
+  - {site: www.footlocker.fr, nom: Foot Locker, interet: sneakers}
+  - {site: www.snipes.com, nom: Snipes, interet: sneakers}
+  - {site: www.sarenza.com, nom: Sarenza, interet: sneakers}
+  - {site: www.spartoo.com, nom: Spartoo, interet: sneakers}
+  - {site: www.birkenstock.com, nom: Birkenstock, interet: sneakers}
+  - {site: www.drmartens.com, nom: Dr. Martens, interet: sneakers}
+  - {site: www.ugg.com, nom: UGG, interet: sneakers}
+  - {site: www.mephisto.com, nom: Mephisto, interet: sneakers}
+  # --- Sacs, bijoux, accessoires
+  - {site: www.longchamp.com, nom: Longchamp, interet: sacs_bijoux}
+  - {site: www.lancel.com, nom: Lancel, interet: sacs_bijoux}
+  - {site: www.letanneur.com, nom: Le Tanneur, interet: sacs_bijoux}
+  - {site: www.jerome-dreyfuss.com, nom: Jérôme Dreyfuss, interet: sacs_bijoux}
+  - {site: www.lancaster.fr, nom: Lancaster, interet: sacs_bijoux}
+  - {site: www.mysezane.com, nom: Sézane, interet: mode_femme}
+  - {site: www.agatha.fr, nom: Agatha, interet: sacs_bijoux}
+  - {site: www.histoiredor.com, nom: Histoire d'Or, interet: sacs_bijoux}
+  - {site: www.marc-orian.fr, nom: Marc Orian, interet: sacs_bijoux}
+  - {site: www.maty.com, nom: Maty, interet: sacs_bijoux}
+  - {site: www.ginette-ny.com, nom: Ginette NY, interet: sacs_bijoux}
+  - {site: www.lesgeorgettes.com, nom: Les Georgettes, interet: sacs_bijoux}
+  - {site: www.medecinedouce.com, nom: Médecine Douce, interet: sacs_bijoux}
+  - {site: www.aliceapart.com, nom: Alice à Paris, interet: sacs_bijoux}
+  - {site: www.izipizi.com, nom: Izipizi, interet: sacs_bijoux}
+  - {site: www.cluse.com, nom: Cluse, interet: montres}
+  - {site: www.lipwatch.com, nom: LIP, interet: montres}
+  - {site: www.fossil.com, nom: Fossil, interet: montres}
+  - {site: www.danielwellington.com, nom: Daniel Wellington, interet: montres}
+  - {site: www.march-lab.com, nom: March LA.B, interet: montres}
+  - {site: www.beaubleu.fr, nom: Beaubleu, interet: montres}
+  # --- Beauté & parfums
+  - {site: fr.caudalie.com, nom: Caudalie, interet: soins}
+  - {site: www.nuxe.com, nom: Nuxe, interet: soins}
+  - {site: www.clarins.fr, nom: Clarins, interet: soins}
+  - {site: fr.loccitane.com, nom: L'Occitane, interet: soins}
+  - {site: www.rituals.com, nom: Rituals, interet: soins}
+  - {site: www.diptyqueparis.com, nom: Diptyque, interet: soins}
+  - {site: www.fragonard.com, nom: Fragonard, interet: parfum_femme}
+  - {site: www.typology.com, nom: Typology, interet: soins}
+  - {site: www.kikocosmetics.com, nom: Kiko, interet: maquillage}
+  - {site: www.filorga.com, nom: Filorga, interet: soins}
+  - {site: www.payot.com, nom: Payot, interet: soins}
+  - {site: www.embryolisse.com, nom: Embryolisse, interet: soins}
+  - {site: www.garancia.fr, nom: Garancia, interet: soins}
+  - {site: www.larosee-cosmetiques.com, nom: La Rosée, interet: soins}
+  - {site: www.absolution-cosmetics.com, nom: Absolution, interet: soins}
+  - {site: www.seasonly.fr, nom: Seasonly, interet: soins}
+  - {site: www.mademoiselle-saint-germain.com, nom: Mademoiselle Saint Germain, interet: soins}
+  - {site: www.officine-universelle-buly.com, nom: Buly 1803, interet: soins}
+  - {site: www.lelabofragrances.com, nom: Le Labo, interet: parfum_femme}
+  - {site: www.byredo.com, nom: Byredo, interet: parfum_femme}
+  - {site: www.jo-malone.fr, nom: Jo Malone, interet: parfum_femme}
+  - {site: www.kerastase.fr, nom: Kérastase, interet: cheveux}
+  - {site: www.ghdhair.com, nom: ghd, interet: cheveux}
+  - {site: www.dyson.fr, nom: Dyson, interet: cheveux}
+  - {site: www.foreo.com, nom: Foreo, interet: soins}
+  - {site: www.cosmeticpharmacie.com, nom: Cosmetic Pharmacie, interet: soins}
+  - {site: www.pharmashopi.com, nom: Pharmashopi, interet: soins}
+  - {site: www.easyparapharmacie.com, nom: Easypara, interet: soins}
+  - {site: www.1001pharmacies.com, nom: 1001 Pharmacies, interet: soins}
+  - {site: www.mypharmacie-beaute.com, nom: Mypharmacie, interet: soins}
+  - {site: www.feelunique.com, nom: Feelunique, interet: maquillage}
+  - {site: www.cultbeauty.com, nom: Cult Beauty, interet: maquillage}
+  - {site: www.spacenk.com, nom: Space NK, interet: maquillage}
+  - {site: www.huda-beauty.fr, nom: Huda Beauty, interet: maquillage}
+  - {site: www.nyxcosmetics.fr, nom: NYX, interet: maquillage}
+  - {site: www.benefitcosmetics.com, nom: Benefit, interet: maquillage}
+  - {site: www.charlottetilbury.com, nom: Charlotte Tilbury, interet: maquillage}
+  # --- Maison, déco, linge, cuisine
+  - {site: www.hay.com, nom: HAY, interet: maison_deco}
+  - {site: www.muuto.com, nom: Muuto, interet: maison_deco}
+  - {site: www.normann-copenhagen.com, nom: Normann Copenhagen, interet: maison_deco}
+  - {site: www.audocph.com, nom: Audo, interet: maison_deco}
+  - {site: www.fatboy.com, nom: Fatboy, interet: maison_deco}
+  - {site: www.flyingtiger.com, nom: Flying Tiger, interet: maison_deco}
+  - {site: www.maisonsarahlavoine.com, nom: Sarah Lavoine, interet: maison_deco}
+  - {site: www.merci-merci.com, nom: Merci, interet: maison_deco}
+  - {site: www.lachaiselongue.fr, nom: La Chaise Longue, interet: maison_deco}
+  - {site: www.fleux.com, nom: Fleux, interet: maison_deco}
+  - {site: www.pa-design.com, nom: Pa Design, interet: maison_deco}
+  - {site: www.maisonbaluchon.fr, nom: Maison Baluchon, interet: maison_deco}
+  - {site: www.bouchara.com, nom: Bouchara, interet: maison_deco}
+  - {site: www.linvosges.com, nom: Linvosges, interet: maison_deco}
+  - {site: www.carreblanc.com, nom: Carré Blanc, interet: maison_deco}
+  - {site: www.blancdesvosges.fr, nom: Blanc des Vosges, interet: maison_deco}
+  - {site: www.tediber.com, nom: Tediber, interet: maison_deco}
+  - {site: www.lapetiteepicerie.fr, nom: La Petite Épicerie, interet: maison_deco}
+  - {site: www.sostrenegrene.com, nom: Søstrene Grene, interet: maison_deco}
+  - {site: www.hema.com, nom: HEMA, interet: maison_deco}
+  - {site: www.natureetdecouvertes.com, nom: Nature & Découvertes, interet: maison_deco}
+  - {site: www.cultura.com, nom: Cultura, interet: jouets}
+  - {site: www.atmosphera.com, nom: Atmosphera, interet: maison_deco}
+  - {site: www.lecreuset.fr, nom: Le Creuset, interet: cuisine}
+  - {site: www.staub.fr, nom: Staub, interet: cuisine}
+  - {site: www.cristel.com, nom: Cristel, interet: cuisine}
+  - {site: www.peugeot-saveurs.com, nom: Peugeot Saveurs, interet: cuisine}
+  - {site: www.smeg.com, nom: Smeg, interet: cuisine}
+  - {site: www.kitchenaid.fr, nom: KitchenAid, interet: cuisine}
+  - {site: www.nespresso.com, nom: Nespresso, interet: cuisine}
+  - {site: www.delonghi.com, nom: De'Longhi, interet: cuisine}
+  - {site: www.mathon.fr, nom: Mathon, interet: cuisine}
+  - {site: www.cuisineaddict.com, nom: Cuisine Addict, interet: cuisine}
+  - {site: www.alice-delice.com, nom: Alice Délice, interet: cuisine}
+  - {site: www.zodio.fr, nom: Zôdio, interet: cuisine}
+  - {site: www.leroymerlin.fr, nom: Leroy Merlin, interet: bricolage}
+  - {site: www.castorama.fr, nom: Castorama, interet: bricolage}
+  - {site: www.manomano.fr, nom: ManoMano, interet: bricolage}
+  - {site: www.weber.com, nom: Weber, interet: bricolage}
+  # --- Tech, audio, jeux
+  - {site: www.sonos.com, nom: Sonos, interet: tech_audio}
+  - {site: www.bose.fr, nom: Bose, interet: tech_audio}
+  - {site: www.marshall.com, nom: Marshall, interet: tech_audio}
+  - {site: fr.jbl.com, nom: JBL, interet: tech_audio}
+  - {site: www.garmin.com, nom: Garmin, interet: montres}
+  - {site: gopro.com, nom: GoPro, interet: tech_audio}
+  - {site: www.polaroid.com, nom: Polaroid, interet: tech_audio}
+  - {site: www.backmarket.fr, nom: Back Market, interet: tech_audio}
+  - {site: www.ldlc.com, nom: LDLC, interet: tech_audio}
+  - {site: www.materiel.net, nom: Materiel.net, interet: tech_audio}
+  - {site: www.rueducommerce.fr, nom: Rue du Commerce, interet: tech_audio}
+  - {site: www.boulanger.com, nom: Boulanger, interet: tech_audio}
+  - {site: www.micromania.fr, nom: Micromania, interet: gaming}
+  - {site: www.king-jouet.com, nom: King Jouet, interet: jouets}
+  - {site: www.joueclub.fr, nom: JouéClub, interet: jouets}
+  - {site: www.smythstoys.com, nom: Smyths Toys, interet: jouets}
+  - {site: www.philibertnet.com, nom: Philibert, interet: jouets}
+  - {site: www.oxybul.com, nom: Oxybul, interet: jouets}
+  # --- Sport
+  - {site: www.intersport.fr, nom: Intersport, interet: sport}
+  - {site: www.go-sport.com, nom: Go Sport, interet: sport}
+  - {site: www.alltricks.fr, nom: Alltricks, interet: sport}
+  - {site: www.i-run.fr, nom: i-Run, interet: sport}
+  - {site: www.ekosport.fr, nom: Ekosport, interet: sport}
+  - {site: www.snowleader.com, nom: Snowleader, interet: sport}
+  - {site: www.auvieuxcampeur.fr, nom: Au Vieux Campeur, interet: sport}
+  - {site: www.lyfestyle-shop.fr, nom: Lyfe, interet: sport}
+  # --- Gourmand & expériences
+  - {site: www.whisky.fr, nom: La Maison du Whisky, interet: gourmand}
+  - {site: www.nicolas.com, nom: Nicolas, interet: gourmand}
+  - {site: www.lepetitballon.com, nom: Le Petit Ballon, interet: gourmand}
+  - {site: www.laduree.fr, nom: Ladurée, interet: gourmand}
+  - {site: www.pierreherme.com, nom: Pierre Hermé, interet: gourmand}
+  - {site: www.jeff-de-bruges.com, nom: Jeff de Bruges, interet: gourmand}
+  - {site: www.lamaisonduchocolat.com, nom: La Maison du Chocolat, interet: gourmand}
+  - {site: www.alain.ducasse-chocolat.com, nom: Le Chocolat Alain Ducasse, interet: gourmand}
+  - {site: www.smartbox.com, nom: Smartbox, interet: experiences}
+  - {site: www.wonderbox.fr, nom: Wonderbox, interet: experiences}
