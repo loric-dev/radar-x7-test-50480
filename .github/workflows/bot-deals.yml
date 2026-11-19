@@ -5,6 +5,14 @@ on:
   schedule:
     - cron: "*/30 * * * *"   # toutes les 30 min (GitHub peut décaler de quelques minutes)
   workflow_dispatch:          # bouton « Run workflow » pour lancer un passage à la main
+  push:                       # et à chaque changement des réglages ou du code (pas des résultats du bot)
+    branches: [main]
+    paths:
+      - config.yaml
+      - bot.py
+      - tableau_modele.html
+      - data/enseignes.yaml
+      - .github/workflows/bot-deals.yml
 
 permissions:
   contents: write             # pour enregistrer la page et la mémoire du bot
