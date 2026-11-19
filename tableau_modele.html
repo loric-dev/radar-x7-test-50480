@@ -158,6 +158,11 @@ input, select, button { font: inherit; letter-spacing: inherit; }
 .seg { display: inline-flex; background: var(--fill); border-radius: 9px; padding: 2px; gap: 2px; flex-wrap: wrap; }
 .seg button { border: 0; background: transparent; color: var(--ink); padding: 6px 13px; border-radius: 7px; cursor: pointer; font-size: 14px; font-weight: 500; }
 .seg button[aria-pressed="true"] { background: var(--surface); box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 0 0 .5px rgba(0, 0, 0, .04); }
+.actifs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: -6px 0 18px; font-size: 14px; color: var(--muted); }
+.actifs .f { display: inline-flex; align-items: center; gap: 6px; border: 0; background: var(--blue-soft); color: var(--link); border-radius: 980px; padding: 5px 10px 5px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.actifs .f span { font-size: 15px; line-height: 1; opacity: .8; }
+.actifs .raz { border: 0; background: none; color: var(--link); font-size: 13px; cursor: pointer; padding: 5px 4px; }
+.empty .btn-soft { margin: 12px 6px 0; }
 .grid.grouped { grid-template-columns: minmax(0, 1fr); gap: 32px; }
 .grp { min-width: 0; }
 .grp-head { display: flex; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; margin-bottom: 8px; }
@@ -402,6 +407,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
         </div>
         <span class="result-count num" id="count"></span>
       </div>
+      <div class="actifs" id="actifs" hidden></div>
       <div class="grid" id="grid"></div>
       <div style="display:grid;margin-top:20px"><button class="btn-ghost" id="more" type="button" hidden>Afficher plus</button></div>
     </section>
@@ -592,33 +598,35 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     if (!MARQUES[k]) MARQUES[k] = { nom: d.marchand.replace(/\.(fr|com|eu)$/i, ""), n: 0 };
     MARQUES[k].n++;
   });
-  (function remplirMarques() {
-    var cles = Object.keys(MARQUES).sort(function (a, b) {
-      return MARQUES[b].n - MARQUES[a].n || MARQUES[a].nom.localeCompare(MARQUES[b].nom, "fr");
-    });
-    var nSuivies = D.deals.filter(estSuivie).length;
-    $("marque").innerHTML = '<option value="">Toutes (' + cles.length + ')</option>' +
-      (nSuivies ? '<option value="__suivies">★ Marques suivies (' + nSuivies + ')</option>' : "") + cles.map(function (k) {
-      return '<option value="' + esc(k) + '">' + esc(MARQUES[k].nom) + " (" + MARQUES[k].n + ")</option>";
-    }).join("");
-  })();
   if (state.marque && state.marque !== "__suivies" && !MARQUES[state.marque]) state.marque = "";
+  function remplirMarques() {
+    // nombres calculés avec les AUTRES filtres actifs (personne, budget, source, recherche)
+    var n = {}, nSuivies = 0, base = D.deals.filter(function (d) { return garde(d, "marque"); });
+    base.forEach(function (d) { var k = cleMarque(d.marchand); if (k) n[k] = (n[k] || 0) + 1; if (estSuivie(d)) nSuivies++; });
+    var cles = Object.keys(n).sort(function (a, b) { return n[b] - n[a] || MARQUES[a].nom.localeCompare(MARQUES[b].nom, "fr"); });
+    if (state.marque && state.marque !== "__suivies" && !n[state.marque]) cles.unshift(state.marque);
+    $("marque").innerHTML = '<option value="">Toutes (' + Object.keys(n).length + ')</option>' +
+      (nSuivies || state.marque === "__suivies" ? '<option value="__suivies">★ Marques suivies (' + nSuivies + ')</option>' : "") +
+      cles.map(function (k) { return '<option value="' + esc(k) + '">' + esc(MARQUES[k].nom) + " (" + (n[k] || 0) + ")</option>"; }).join("");
+    $("marque").value = state.marque;
+  }
 
   /* Deals */
   function score(d) { return Math.min(d.temp || 0, 2000) / 20 + 2 * (d.red || 0) + (/plus bas|habituel/.test(d.raison || "") ? 40 : 0); }
-  function filtered() {
-    var q = sansAccent(state.q.trim());
-    var max = parseFloat(state.max);
-    var list = D.deals.filter(function (d) {
-      if (state.who && pour(d).indexOf(state.who) < 0) return false;
-      if (state.src === "fav" && !favs[d.id]) return false;
-      if (state.src && state.src !== "fav" && d.src !== state.src && !(state.src === "LeDénicheur" && d.src === "Surveillance")) return false;
-      if (max > 0 && d.prix != null && d.prix > max) return false;
-      if (q && sansAccent(d.titre + " " + d.marchand).indexOf(q) < 0) return false;
+  function garde(d, sauf) {  // le deal passe-t-il tous les filtres (sauf celui nommé) ?
+    var q = sansAccent(state.q.trim()), max = parseFloat(state.max);
+    if (sauf !== "who" && state.who && pour(d).indexOf(state.who) < 0) return false;
+    if (sauf !== "src" && state.src && d.src !== state.src && !(state.src === "LeDénicheur" && d.src === "Surveillance")) return false;
+    if (sauf !== "max" && max > 0 && d.prix != null && d.prix > max) return false;
+    if (sauf !== "q" && q && sansAccent(d.titre + " " + d.marchand).indexOf(q) < 0) return false;
+    if (sauf !== "marque") {
       if (state.marque === "__suivies") { if (!estSuivie(d)) return false; }
       else if (state.marque && cleMarque(d.marchand) !== state.marque) return false;
-      return true;
-    });
+    }
+    return true;
+  }
+  function filtered() {
+    var list = D.deals.filter(function (d) { return garde(d); });
     var key = {
       score: function (a, b) { return score(b) - score(a); },
       marque: function (a, b) { return score(b) - score(a); },
@@ -677,14 +685,46 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     $("more").textContent = "Afficher plus de marques (" + (ordre.length - state.groupes) + ")";
     $("count").textContent = list.length + " deals · " + ordre.length + " marque" + (ordre.length > 1 ? "s" : "");
   }
+  var NOMS_SRC = { Dealabs: "Dealabs", "LeDénicheur": "LeDénicheur", Marchands: "Marchands", X: "Comptes X" };
+  function renderActifs() {
+    var f = [];
+    if (state.who) f.push(["who", "Pour : " + state.who]);
+    if (state.marque) f.push(["marque", "Marque : " + (state.marque === "__suivies" ? "★ marques suivies" : (MARQUES[state.marque] || {}).nom || state.marque)]);
+    if (parseFloat(state.max) > 0) f.push(["max", "Budget ≤ " + eur(parseFloat(state.max))]);
+    if (state.src) f.push(["src", "Source : " + (NOMS_SRC[state.src] || state.src)]);
+    if (state.q.trim()) f.push(["q", "Recherche : « " + state.q.trim() + " »"]);
+    $("actifs").hidden = !f.length;
+    $("actifs").innerHTML = f.length ? "Filtres actifs :" + f.map(function (x) {
+      return '<button type="button" class="f" data-retirer-filtre="' + x[0] + '" title="Retirer ce filtre">' + esc(x[1]) + ' <span aria-hidden="true">×</span></button>';
+    }).join("") + (f.length > 1 ? '<button type="button" class="raz" data-retirer-filtre="tout">Tout effacer</button>' : "") : "";
+  }
+  function retirerFiltre(k) {
+    if (k === "who" || k === "tout") state.who = "";
+    if (k === "marque" || k === "tout") state.marque = "";
+    if (k === "max" || k === "tout") { state.max = ""; $("max").value = ""; }
+    if (k === "src" || k === "tout") { state.src = ""; syncSeg(); }
+    if (k === "q" || k === "tout") { state.q = ""; $("q").value = ""; }
+    state.shown = 24; save(); renderPeople(); renderDeals();
+  }
   function renderDeals() {
+    remplirMarques(); renderActifs();
     var list = filtered();
     $("grid").classList.remove("grouped");
     $("count").textContent = list.length + " deal" + (list.length > 1 ? "s" : "") + (state.marque === "__suivies" ? " de marques suivies" : state.marque && MARQUES[state.marque] ? " chez " + MARQUES[state.marque].nom : "");
     if (!list.length) {
+      var aide = "";
+      if (D.deals.length) {  // quel filtre bloque ? on propose de l'enlever
+        [["who", state.who ? "Voir pour tout le monde" : ""], ["max", parseFloat(state.max) > 0 ? "Sans limite de budget" : ""],
+         ["src", state.src ? "Toutes les sources" : ""], ["q", state.q.trim() ? "Effacer la recherche" : ""],
+         ["marque", state.marque ? "Toutes les marques" : ""]].forEach(function (x) {
+          if (!x[1]) return;
+          var n = D.deals.filter(function (d) { return garde(d, x[0]); }).length;
+          if (n) aide += '<button type="button" class="btn-soft" data-retirer-filtre="' + x[0] + '">' + esc(x[1]) + " (" + n + ")</button>";
+        });
+      }
       $("grid").innerHTML = '<div class="empty" style="grid-column:1/-1"><strong>' +
-        (D.deals.length ? "Aucun deal avec ces filtres." : "Pas encore de deal retenu.") + '</strong>' +
-        (D.deals.length ? "Élargis la recherche ou choisis « Tout le monde »." : "Le bot passe toutes les 30 minutes. Les premiers deals arrivent au prochain passage.") + '</div>';
+        (D.deals.length ? "Aucun deal avec cette combinaison de filtres." : "Pas encore de deal retenu.") + '</strong>' +
+        (D.deals.length ? (aide ? "Un des filtres est trop restrictif :<br>" + aide : "Élargis la recherche.") : "Le bot passe toutes les 30 minutes. Les premiers deals arrivent au prochain passage.") + '</div>';
       $("more").hidden = true; return;
     }
     if (state.tri === "marque" && !state.marque) { renderGroupes(list); return; }
@@ -692,7 +732,10 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     $("more").hidden = list.length <= state.shown;
     $("more").textContent = "Afficher plus (" + (list.length - state.shown) + ")";
   }
+  $("actifs").addEventListener("click", function (e) { var b = e.target.closest("[data-retirer-filtre]"); if (b) retirerFiltre(b.getAttribute("data-retirer-filtre")); });
   function onCardClick(e) {
+    var rf = e.target.closest("[data-retirer-filtre]");
+    if (rf) { retirerFiltre(rf.getAttribute("data-retirer-filtre")); return; }
     var v = e.target.closest("[data-voir]");
     if (v) {
       state.marque = v.getAttribute("data-voir"); $("marque").value = state.marque; state.shown = 24; save(); renderDeals();
