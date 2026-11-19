@@ -330,6 +330,75 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   .bar .name span.long { display: none; }
 }
 @media (max-width: 480px) { .pill-count { display: none; } }
+
+/* Téléphone : affichage compact */
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  .bar .inner { height: 46px; }
+  .bar .name { font-size: 17px; }
+  .hero { padding-block: 18px 0; gap: 10px; }
+  .hero h1 { font-size: 30px; }
+  .hero .lead { font-size: 16px; margin-top: 6px; }
+  .hero .upd { font-size: 12px; margin-top: 8px; }
+  .countdown .big { font-size: 40px; display: inline; }
+  .countdown .cap { display: inline; margin-left: 6px; font-size: 13px; }
+  main { gap: 34px; padding-top: 18px; }
+  .sec-head { margin-bottom: 12px; }
+  .sec-head h2 { font-size: 22px; }
+  .sec-head .hint { font-size: 13px; }
+  /* tuiles « Pour qui ? » : 3 par ligne */
+  .people { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .tag { padding: 10px 10px 9px; border-radius: 14px; gap: 2px; }
+  .tag .emoji { font-size: 20px; }
+  .tag .who { font-size: 13px; margin-top: 2px; line-height: 1.2; }
+  .tag .count { font-size: 19px; }
+  .tag .sub { font-size: 10.5px; line-height: 1.3; }
+  /* fiches : 2 par ligne */
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .grid.grouped { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .shelf { grid-auto-columns: 46%; gap: 10px; padding-bottom: 12px; }
+  .deal { border-radius: 14px; }
+  .media { margin: 8px 8px 0; aspect-ratio: 1 / 1; border-radius: 10px; font-size: 30px; }
+  .media img { padding: 6px; }
+  .body { padding: 8px 10px 2px; gap: 5px; }
+  .eyebrow { font-size: 10.5px; min-height: 13px; }
+  .deal h3 { font-size: 13.5px; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .price { gap: 5px; }
+  .price .now { font-size: 16px; }
+  .price .was { font-size: 12px; }
+  .b { font-size: 10.5px; padding: 2px 7px; }
+  .chips { gap: 4px; }
+  .chip { font-size: 10.5px; padding: 2px 7px; }
+  .code { font-size: 11px; padding: 3px 7px; }
+  .foot { padding: 8px 10px 10px; gap: 4px; }
+  .btn-blue { font-size: 13px; padding: 6px 12px; }
+  .star { font-size: 20px; padding: 2px 4px; line-height: 1; }
+  .star .lbl { display: none; }
+  .link-small { font-size: 11.5px; }
+  /* barre de filtres */
+  .toolbar { gap: 8px; margin-bottom: 14px; }
+  .field-ctl { font-size: 15px; padding: 8px 10px; }
+  .budget label, .sort label { font-size: 13px; }
+  .budget .field-ctl { width: 84px; }
+  #marque { max-width: none; }
+  .budget { flex: 0 0 auto; }
+  .sort { flex: 1 1 150px; min-width: 0; }
+  .sort .wrapsel { flex: 1; min-width: 0; }
+  .sort select { width: 100%; }
+  .actifs { font-size: 12px; margin-bottom: 12px; }
+  .actifs .f { font-size: 12px; padding: 4px 8px 4px 10px; }
+  /* coups de cœur et sections */
+  .sel-group { padding: 14px 14px 6px; }
+  .sel-group header h3 { font-size: 17px; }
+  .sel-row { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 10px; padding: 8px 0; }
+  .sel-row .mini { width: 44px; height: 44px; }
+  .sel-row .t { font-size: 13.5px; }
+  .step { padding: 14px; }
+  .step h3 { font-size: 15px; }
+  .step p { font-size: 13px; }
+  .wcard { padding: 16px; }
+  .empty { padding: 22px 16px; font-size: 14px; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 </style>
 </head>
@@ -718,7 +787,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
       '<div class="chips">' + chips + '</div><div class="meta">' + meta + '</div>' +
       (D.repo && d.src !== "Dealabs" && d.src !== "X" ? '<a class="link-small avance" href="' + esc(suivreUrl(d.titre, d.url, d.prix, pour(d))) + '" target="_blank" rel="noopener">⏱ Suivre le prix</a>' : "") + '</div>' +
       '<div class="foot"><a class="btn-blue" href="' + esc(d.url) + '" target="_blank" rel="noopener">Voir le deal</a>' +
-      '<button type="button" class="star" data-id="' + esc(d.id) + '" aria-pressed="' + (!!favs[d.id]) + '">' + (favs[d.id] ? "♥ Coup de cœur" : "♡ Coup de cœur") + '</button></div>' +
+      '<button type="button" class="star" data-id="' + esc(d.id) + '" aria-pressed="' + (!!favs[d.id]) + '">' + (favs[d.id] ? '♥<span class="lbl"> Coup de cœur</span>' : '♡<span class="lbl"> Coup de cœur</span>') + '</button></div>' +
       '</article>';
   }
   function renderGroupes(list) {
