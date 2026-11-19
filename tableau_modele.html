@@ -331,6 +331,19 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
 }
 @media (max-width: 480px) { .pill-count { display: none; } }
 
+/* Bouton « retour en haut » */
+.haut {
+  position: fixed; z-index: 25;
+  right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--glass); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+  color: var(--ink); box-shadow: 0 4px 16px rgba(0, 0, 0, .14); cursor: pointer;
+  display: grid; place-items: center; opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.haut svg { width: 20px; height: 20px; }
+.haut.visible { opacity: 1; transform: none; pointer-events: auto; }
+
 /* Téléphone : affichage compact */
 @media (max-width: 600px) {
   body { font-size: 15px; }
@@ -545,6 +558,10 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     </footer>
   </main>
 </div>
+
+<button type="button" class="haut" id="haut" aria-label="Revenir en haut de la page" title="Revenir en haut">
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5"></path></svg>
+</button>
 
 <script id="donnees" type="application/json">__DONNEES__</script>
 <script>
@@ -1218,6 +1235,16 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   majBascule();
   if (document.documentElement.classList.contains("simple")) { state.src = ""; if (state.tri === "marque") state.tri = "score"; $("tri").value = state.tri; }
   $("src-x").hidden = !D.deals.some(function (d) { return d.src === "X"; });
+
+  /* Retour en haut : visible après avoir défilé d'un écran */
+  var bHaut = $("haut");
+  function majHaut() { bHaut.classList.toggle("visible", window.scrollY > window.innerHeight * 0.8); }
+  window.addEventListener("scroll", majHaut, { passive: true });
+  bHaut.addEventListener("click", function () {
+    var doux = !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    window.scrollTo({ top: 0, behavior: doux ? "smooth" : "auto" });
+  });
+  majHaut();
 
   syncSeg(); renderMust(); renderSel(); renderPeople(); renderDeals(); renderWatch(); renderDrops();
 })();
