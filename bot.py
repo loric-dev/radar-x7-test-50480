@@ -136,6 +136,7 @@ class Deal:
     expire: bool = False
     plus_bas: str = ""  # ex. « plus bas prix des 3 derniers mois »
     tags: set[str] = field(default_factory=set)  # centres d'intérêt (parfum_femme, gaming…)
+    suivie: str = ""  # nom de la « marque suivie » (tous ses bons plans Dealabs sont gardés)
 
     def texte(self) -> str:
         return normaliser(f"{self.titre} {self.marchand} {self.details}")
@@ -331,6 +332,16 @@ def parser_rss_dealabs(xml_txt: str, groupe: str) -> list[Deal]:
     return deals
 
 
+def marque_suivie(d: Deal, cfg: dict) -> str:
+    """Nom de la marque suivie si le bon plan vient d'elle (marchand ou nom dans le titre)."""
+    marchand, titre = normaliser(d.marchand), normaliser(d.titre)
+    for m in (cfg.get("dealabs") or {}).get("marques_suivies") or []:
+        cle = normaliser(m["marque"]).strip()
+        if cle and (cle in marchand or f" {cle} " in titre):
+            return m["marque"]
+    return ""
+
+
 def collecter_dealabs(http: Http, cfg: dict, etat: dict, profils: list[dict]) -> list[Deal]:
     dcfg = cfg.get("dealabs") or {}
     if not dcfg.get("actif", True):
@@ -375,15 +386,35 @@ def collecter_dealabs(http: Http, cfg: dict, etat: dict, profils: list[dict]) ->
         for d in ds:
             if d.id in tous or d.id in candidats or time.time() - d.publie > 48 * 3600:
                 continue
-            if any(correspond(d, p, cfg) for p in profils):
+            if marque_suivie(d, cfg) or any(correspond(d, p, cfg) for p in profils):
                 candidats[d.id] = {"url": d.url, "t": int(time.time()), "groupe": g, "verif": 0}
         log(f"  Dealabs RSS {g:<34} {len(ds):>3} nouveautés")
+
+    # b bis) pages marchand des marques suivies (leurs derniers bons plans), toutes les 3 heures
+    suivies = [m for m in dcfg.get("marques_suivies") or [] if m.get("page")]
+    toutes = time.time() - etat.get("dernier_marques_suivies", 0) > dcfg.get("marques_toutes_les_heures", 3) * 3600
+    if toutes:
+        etat["dernier_marques_suivies"] = time.time()
+    for m in suivies:
+        if toutes or m.get("prioritaire"):  # prioritaire : relue à chaque passage
+            r = http.get(f"{DEALABS}/codes-promo/{m['page']}")
+            if r is None or r.status_code != 200:
+                continue
+            n = 0
+            for lien, ident in re.findall(r'href="(https://www\.dealabs\.com/bons-plans/[^"?#]*?-(\d{6,}))[?#"]', r.text):
+                cle = f"dealabs:{ident}"
+                if cle not in tous and cle not in candidats:
+                    candidats[cle] = {"url": lien, "t": int(time.time()), "groupe": None, "verif": 0,
+                                      "prioritaire": bool(m.get("prioritaire"))}
+                    n += 1
+            log(f"  Dealabs marque suivie {m['marque']:<24} {n:>3} nouveaux bons plans")
 
     # c) on rafraîchit la page des candidats pour connaître leur température
     duree = dcfg.get("suivi_nouveautes_heures", 72) * 3600
     for k in [k for k, v in candidats.items() if time.time() - v["t"] > duree]:
         del candidats[k]
-    a_verifier = sorted((k for k in candidats if k not in tous), key=lambda k: candidats[k]["verif"])
+    a_verifier = sorted((k for k in candidats if k not in tous),
+                        key=lambda k: (not candidats[k].get("prioritaire"), candidats[k]["verif"]))
     for k in a_verifier[: dcfg.get("max_pages_deal_par_passage", 25)]:
         c = candidats[k]
         c["verif"] = int(time.time())
@@ -1248,6 +1279,10 @@ def etiqueter(deal: Deal, cfg: dict) -> set[str]:
     """Centres d'intérêt d'un deal : mots-clés, catégories (groupes) ou marchands."""
     texte, marchand = deal.texte(), normaliser(deal.marchand)
     tags = set(deal.tags)
+    if deal.suivie:
+        for m in (cfg.get("dealabs") or {}).get("marques_suivies") or []:
+            if m["marque"] == deal.suivie:
+                tags |= set(m.get("interets") or [])
     for c in cfg.get("centres_interet") or []:
         if premier_mot_trouve(c.get("mots_cles"), texte) \
                 or deal.groupes & set(c.get("groupes") or []) \
@@ -1290,6 +1325,8 @@ def est_gros_deal(deal: Deal, profil: dict, cfg: dict) -> str | None:
     if deal.publie and time.time() - deal.publie > s.get("age_max_jours", 14) * JOUR:
         return None
     r_min = s.get("reduction_min", 30)
+    if deal.source == "Dealabs" and deal.suivie:  # marque suivie : tous ses bons plans actifs
+        return f"bon plan {deal.suivie} (marque suivie)"
     if deal.source == "Marchands":  # déjà filtré par les seuils de chaque marque / catalogue
         return deal.plus_bas or (f"-{deal.reduction} %" if deal.reduction else None)
     if deal.source != "Dealabs":  # déjà validé par l'historique de prix
@@ -1614,6 +1651,8 @@ def main() -> int:
         if d.expire:
             tableau.pop(d.id, None)
             continue
+        if d.source == "Dealabs":
+            d.suivie = marque_suivie(d, cfg)
         d.tags = etiqueter(d, cfg)
         pour, raison = router(d, profils, cfg)
         if any(p.get("tous") for p in pour):

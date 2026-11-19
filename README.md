@@ -57,7 +57,7 @@ Conseil : pour un produit vendu partout (Dyson, AirPods, parfum…), donne le li
 
 Sur le prix barré du Black Friday, le bot se méfie : pour LeDénicheur et les catalogues, il compare au **prix réellement constaté** les semaines précédentes, pas seulement au prix barré affiché. Il lit chaque site en respectant ses règles (robots.txt), à raison d'une page toutes les 2 secondes par site.
 
-Uniqlo, Kave Home, Zara, H&M, Sézane, Kiabi, Maisons du Monde, La Redoute et AM.PM bloquent la lecture automatique. Leurs promos arrivent par **Dealabs**, et les profils les reconnaissent par leur nom.
+Uniqlo, Kave Home, Zara, H&M, Sézane, Sephora, Zalando, Maisons du Monde, La Redoute et AM.PM bloquent la lecture automatique. Ce sont des **marques suivies** : le bot garde **tous** leurs bons plans publiés sur Dealabs, même peu votés. Il lit pour cela les flux de nouveautés et la page Dealabs de chaque marque. **Uniqlo est prioritaire** : sa page est relue à chaque passage. Sur la page, choisis **★ Marques suivies** (ou directement « Uniqlo ») dans le menu **Marque**. Pour suivre une autre marque, ajoute-la dans `dealabs → marques_suivies` du `config.yaml`.
 
 ---
 

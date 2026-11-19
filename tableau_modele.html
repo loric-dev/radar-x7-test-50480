@@ -584,6 +584,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   });
 
   /* Marques : regroupement des noms proches (« Amazon » et « Amazon.fr ») */
+  function estSuivie(d) { return /\(marque suivie\)/.test(d.raison || ""); }
   function cleMarque(m) { return sansAccent(m || "").replace(/\.(fr|com|eu)$/, "").replace(/[^a-z0-9]+/g, ""); }
   var MARQUES = {};
   D.deals.forEach(function (d) {
@@ -595,11 +596,13 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     var cles = Object.keys(MARQUES).sort(function (a, b) {
       return MARQUES[b].n - MARQUES[a].n || MARQUES[a].nom.localeCompare(MARQUES[b].nom, "fr");
     });
-    $("marque").innerHTML = '<option value="">Toutes (' + cles.length + ')</option>' + cles.map(function (k) {
+    var nSuivies = D.deals.filter(estSuivie).length;
+    $("marque").innerHTML = '<option value="">Toutes (' + cles.length + ')</option>' +
+      (nSuivies ? '<option value="__suivies">★ Marques suivies (' + nSuivies + ')</option>' : "") + cles.map(function (k) {
       return '<option value="' + esc(k) + '">' + esc(MARQUES[k].nom) + " (" + MARQUES[k].n + ")</option>";
     }).join("");
   })();
-  if (state.marque && !MARQUES[state.marque]) state.marque = "";
+  if (state.marque && state.marque !== "__suivies" && !MARQUES[state.marque]) state.marque = "";
 
   /* Deals */
   function score(d) { return Math.min(d.temp || 0, 2000) / 20 + 2 * (d.red || 0) + (/plus bas|habituel/.test(d.raison || "") ? 40 : 0); }
@@ -612,7 +615,8 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
       if (state.src && state.src !== "fav" && d.src !== state.src && !(state.src === "LeDénicheur" && d.src === "Surveillance")) return false;
       if (max > 0 && d.prix != null && d.prix > max) return false;
       if (q && sansAccent(d.titre + " " + d.marchand).indexOf(q) < 0) return false;
-      if (state.marque && cleMarque(d.marchand) !== state.marque) return false;
+      if (state.marque === "__suivies") { if (!estSuivie(d)) return false; }
+      else if (state.marque && cleMarque(d.marchand) !== state.marque) return false;
       return true;
     });
     var key = {
@@ -676,7 +680,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   function renderDeals() {
     var list = filtered();
     $("grid").classList.remove("grouped");
-    $("count").textContent = list.length + " deal" + (list.length > 1 ? "s" : "") + (state.marque && MARQUES[state.marque] ? " chez " + MARQUES[state.marque].nom : "");
+    $("count").textContent = list.length + " deal" + (list.length > 1 ? "s" : "") + (state.marque === "__suivies" ? " de marques suivies" : state.marque && MARQUES[state.marque] ? " chez " + MARQUES[state.marque].nom : "");
     if (!list.length) {
       $("grid").innerHTML = '<div class="empty" style="grid-column:1/-1"><strong>' +
         (D.deals.length ? "Aucun deal avec ces filtres." : "Pas encore de deal retenu.") + '</strong>' +

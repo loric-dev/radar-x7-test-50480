@@ -221,7 +221,37 @@ dealabs:
   page_hot: true                     # page des deals les plus chauds du moment
   pages_groupe_toutes_les_heures: 3  # pages « top du mois » de chaque catégorie
   suivi_nouveautes_heures: 48        # durée de suivi de la température d'un nouveau deal
-  max_pages_deal_par_passage: 40
+  max_pages_deal_par_passage: 60
+  # MARQUES SUIVIES : enseignes qui bloquent les robots. Tous leurs bons plans Dealabs
+  # sont gardés, même peu votés (flux de nouveautés + page marchand Dealabs).
+  # page = adresse https://www.dealabs.com/codes-promo/<page> (facultatif)
+  marques_toutes_les_heures: 3
+  marques_suivies:
+    - {marque: Uniqlo, page: uniqlo, interets: [mode_femme, mode_homme], prioritaire: true}   # relue à chaque passage
+    - {marque: Sephora, page: sephora, interets: [maquillage, soins, parfum_femme, parfum_homme]}
+    - {marque: Nocibé, page: nocibe, interets: [maquillage, soins, parfum_femme, parfum_homme]}
+    - {marque: Marionnaud, page: marionnaud, interets: [maquillage, soins, parfum_femme, parfum_homme]}
+    - {marque: Yves Rocher, page: yves-rocher, interets: [soins, parfum_femme]}
+    - {marque: Zalando, page: zalando, interets: [mode_femme, mode_homme, sneakers]}
+    - {marque: Zara, page: zara, interets: [mode_femme, mode_homme]}
+    - {marque: H&M, page: hm, interets: [mode_femme, mode_homme]}
+    - {marque: Mango, page: mango, interets: [mode_femme]}
+    - {marque: Sézane, interets: [mode_femme]}
+    - {marque: Kiabi, page: kiabi, interets: [mode_femme, mode_homme]}
+    - {marque: Jules, page: jules, interets: [mode_homme]}
+    - {marque: Celio, page: celio, interets: [mode_homme]}
+    - {marque: Levi's, page: levis, interets: [mode_homme, mode_femme]}
+    - {marque: Lacoste, page: lacoste, interets: [mode_homme]}
+    - {marque: The North Face, page: the-north-face, interets: [mode_homme, sport]}
+    - {marque: Adidas, page: adidas, interets: [sneakers]}
+    - {marque: Pandora, page: pandora, interets: [sacs_bijoux]}
+    - {marque: Swarovski, page: swarovski, interets: [sacs_bijoux]}
+    - {marque: Kave Home, interets: [maison_deco]}
+    - {marque: Maisons du Monde, interets: [maison_deco]}
+    - {marque: AM.PM, interets: [maison_deco]}
+    - {marque: La Redoute, interets: [maison_deco, mode_femme]}
+    - {marque: Lego, page: lego, interets: [jouets]}
+    - {marque: Decathlon, page: decathlon, interets: [sport]}
   groupes:
     # Mode
     - mode-accessoires
