@@ -158,6 +158,13 @@ input, select, button { font: inherit; letter-spacing: inherit; }
 .seg { display: inline-flex; background: var(--fill); border-radius: 9px; padding: 2px; gap: 2px; flex-wrap: wrap; }
 .seg button { border: 0; background: transparent; color: var(--ink); padding: 6px 13px; border-radius: 7px; cursor: pointer; font-size: 14px; font-weight: 500; }
 .seg button[aria-pressed="true"] { background: var(--surface); box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 0 0 .5px rgba(0, 0, 0, .04); }
+.grid.grouped { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+.grp { min-width: 0; }
+.grp-head { display: flex; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.grp-head h3 { margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -.02em; }
+.grp-head .hint { font-size: 14px; color: var(--muted); }
+.grp-head .spacer { flex: 1 1 auto; }
+#marque { max-width: 220px; }
 .result-count { margin-left: auto; font-size: 14px; color: var(--muted); }
 
 /* Fiches deal */
@@ -375,7 +382,14 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
               <option value="temp">Plus votés</option>
               <option value="prix">Prix croissant</option>
               <option value="recent">Plus récents</option>
+              <option value="marque">Regroupés par marque</option>
             </select>
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"></path></svg>
+          </span>
+        </div>
+        <div class="sort"><label for="marque">Marque</label>
+          <span class="wrapsel">
+            <select class="field-ctl" id="marque"><option value="">Toutes</option></select>
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"></path></svg>
           </span>
         </div>
@@ -487,7 +501,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
 
   /* État des filtres */
   var S = store.get("radar-filtres", {});
-  var state = { who: S.who || "", src: S.src === "fav" ? "" : (S.src || ""), tri: S.tri || "score", q: "", max: S.max || "", shown: 24 };
+  var state = { who: S.who || "", src: S.src === "fav" ? "" : (S.src || ""), tri: S.tri || "score", q: "", max: S.max || "", shown: 24, marque: S.marque || "", groupes: 12 };
   /* Personnes : chaque visiteur a les siennes, enregistrées dans son navigateur (aucun compte) */
   function copieDefaut() {
     return D.profils.map(function (p) {
@@ -546,7 +560,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     return "https://github.com/" + D.repo + "/issues/new?title=" + encodeURIComponent("Suivre : " + (nom || "")) +
       "&body=" + encodeURIComponent(corps);
   }
-  var save = function () { store.set("radar-filtres", { who: state.who, src: state.src, tri: state.tri, max: state.max }); };
+  var save = function () { store.set("radar-filtres", { who: state.who, src: state.src, tri: state.tri, max: state.max, marque: state.marque }); };
 
   /* Tuiles personnes */
   function renderPeople() {
@@ -569,6 +583,24 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     state.who = b.getAttribute("data-who"); state.shown = 24; save(); renderPeople(); renderDeals();
   });
 
+  /* Marques : regroupement des noms proches (« Amazon » et « Amazon.fr ») */
+  function cleMarque(m) { return sansAccent(m || "").replace(/\.(fr|com|eu)$/, "").replace(/[^a-z0-9]+/g, ""); }
+  var MARQUES = {};
+  D.deals.forEach(function (d) {
+    var k = cleMarque(d.marchand); if (!k) return;
+    if (!MARQUES[k]) MARQUES[k] = { nom: d.marchand.replace(/\.(fr|com|eu)$/i, ""), n: 0 };
+    MARQUES[k].n++;
+  });
+  (function remplirMarques() {
+    var cles = Object.keys(MARQUES).sort(function (a, b) {
+      return MARQUES[b].n - MARQUES[a].n || MARQUES[a].nom.localeCompare(MARQUES[b].nom, "fr");
+    });
+    $("marque").innerHTML = '<option value="">Toutes (' + cles.length + ')</option>' + cles.map(function (k) {
+      return '<option value="' + esc(k) + '">' + esc(MARQUES[k].nom) + " (" + MARQUES[k].n + ")</option>";
+    }).join("");
+  })();
+  if (state.marque && !MARQUES[state.marque]) state.marque = "";
+
   /* Deals */
   function score(d) { return Math.min(d.temp || 0, 2000) / 20 + 2 * (d.red || 0) + (/plus bas|habituel/.test(d.raison || "") ? 40 : 0); }
   function filtered() {
@@ -580,10 +612,12 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
       if (state.src && state.src !== "fav" && d.src !== state.src && !(state.src === "LeDénicheur" && d.src === "Surveillance")) return false;
       if (max > 0 && d.prix != null && d.prix > max) return false;
       if (q && sansAccent(d.titre + " " + d.marchand).indexOf(q) < 0) return false;
+      if (state.marque && cleMarque(d.marchand) !== state.marque) return false;
       return true;
     });
     var key = {
       score: function (a, b) { return score(b) - score(a); },
+      marque: function (a, b) { return score(b) - score(a); },
       red: function (a, b) { return (b.red || 0) - (a.red || 0); },
       temp: function (a, b) { return (b.temp || 0) - (a.temp || 0); },
       prix: function (a, b) { return (a.prix == null ? 1e9 : a.prix) - (b.prix == null ? 1e9 : b.prix); },
@@ -618,20 +652,48 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
       '<button type="button" class="star" data-id="' + esc(d.id) + '" aria-pressed="' + (!!favs[d.id]) + '">' + (favs[d.id] ? "♥ Gardé" : "♡ Garder") + '</button></div>' +
       '</article>';
   }
+  function renderGroupes(list) {
+    var groupes = {}, ordre = [];
+    list.forEach(function (d) {
+      var k = cleMarque(d.marchand) || "?";
+      if (!groupes[k]) { groupes[k] = []; ordre.push(k); }
+      groupes[k].push(d);
+    });
+    ordre.sort(function (a, b) { return groupes[b].length - groupes[a].length || score(groupes[b][0]) - score(groupes[a][0]); });
+    $("grid").classList.add("grouped");
+    $("grid").innerHTML = ordre.slice(0, state.groupes).map(function (k) {
+      var ds = groupes[k], best = ds.reduce(function (m, d) { return Math.max(m, d.red || 0); }, 0);
+      var nom = (MARQUES[k] || {}).nom || ds[0].marchand || "Autres";
+      return '<section class="grp"><div class="grp-head"><h3>' + esc(nom) + '</h3><span class="hint">' + ds.length + " deal" + (ds.length > 1 ? "s" : "") +
+        (best ? " · jusqu'à −" + best + "\u00a0%" : "") + '</span><span class="spacer"></span>' +
+        (ds.length > 1 ? '<button type="button" class="btn-soft" data-voir="' + esc(k) + '">Voir les ' + ds.length + '</button>' : "") + '</div>' +
+        '<div class="shelf">' + ds.slice(0, 10).map(card).join("") + '</div></section>';
+    }).join("");
+    $("more").hidden = ordre.length <= state.groupes;
+    $("more").textContent = "Afficher plus de marques (" + (ordre.length - state.groupes) + ")";
+    $("count").textContent = list.length + " deals · " + ordre.length + " marque" + (ordre.length > 1 ? "s" : "");
+  }
   function renderDeals() {
     var list = filtered();
-    $("count").textContent = list.length + " deal" + (list.length > 1 ? "s" : "");
+    $("grid").classList.remove("grouped");
+    $("count").textContent = list.length + " deal" + (list.length > 1 ? "s" : "") + (state.marque && MARQUES[state.marque] ? " chez " + MARQUES[state.marque].nom : "");
     if (!list.length) {
       $("grid").innerHTML = '<div class="empty" style="grid-column:1/-1"><strong>' +
         (D.deals.length ? "Aucun deal avec ces filtres." : "Pas encore de deal retenu.") + '</strong>' +
         (D.deals.length ? "Élargis la recherche ou choisis « Tout le monde »." : "Le bot passe toutes les 30 minutes. Les premiers deals arrivent au prochain passage.") + '</div>';
       $("more").hidden = true; return;
     }
+    if (state.tri === "marque" && !state.marque) { renderGroupes(list); return; }
     $("grid").innerHTML = list.slice(0, state.shown).map(card).join("");
     $("more").hidden = list.length <= state.shown;
     $("more").textContent = "Afficher plus (" + (list.length - state.shown) + ")";
   }
   function onCardClick(e) {
+    var v = e.target.closest("[data-voir]");
+    if (v) {
+      state.marque = v.getAttribute("data-voir"); $("marque").value = state.marque; state.shown = 24; save(); renderDeals();
+      $("t-deals").scrollIntoView({ behavior: "smooth", block: "start" }); return;
+    }
     var s = e.target.closest(".star");
     if (s) {
       var id = s.getAttribute("data-id");
@@ -648,7 +710,12 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   function selectText(el) { try { var r = document.createRange(); r.selectNodeContents(el); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); } catch (e) {} }
   $("grid").addEventListener("click", onCardClick);
   $("must").addEventListener("click", onCardClick);
-  $("more").addEventListener("click", function () { state.shown += 24; renderDeals(); });
+  $("more").addEventListener("click", function () {
+    if (state.tri === "marque" && !state.marque) state.groupes += 12; else state.shown += 24;
+    renderDeals();
+  });
+  $("marque").value = state.marque;
+  $("marque").addEventListener("change", function (e) { state.marque = e.target.value; state.shown = 24; save(); renderDeals(); });
   $("q").addEventListener("input", function (e) { state.q = e.target.value; state.shown = 24; renderDeals(); });
   $("max").value = state.max;
   $("max").addEventListener("input", function (e) { state.max = e.target.value; state.shown = 24; save(); renderDeals(); });
