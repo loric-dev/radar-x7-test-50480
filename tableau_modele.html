@@ -86,7 +86,8 @@ a:hover { text-decoration: underline; }
   border-bottom: 1px solid var(--line);
 }
 .bar .inner { height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.bar .name { font-weight: 600; font-size: 19px; letter-spacing: -.02em; display: flex; align-items: center; gap: 8px; }
+.bar .name { font-weight: 600; font-size: 19px; letter-spacing: -.02em; display: flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; cursor: pointer; }
+.bar .name:hover { text-decoration: none; opacity: .8; }
 .bar .name svg { width: 20px; height: 20px; color: var(--red); flex: none; }
 .bar-right { display: flex; align-items: center; gap: 10px; }
 .theme { display: inline-flex; background: var(--fill); border-radius: 980px; padding: 2px; gap: 2px; }
@@ -206,14 +207,14 @@ input, select, button { font: inherit; letter-spacing: inherit; }
 .chip { font-size: 13px; background: var(--fill); color: var(--ink); padding: 3px 10px; border-radius: 980px; font-weight: 500; }
 .code { font-size: 13px; font-weight: 600; border: 1px dashed var(--muted); background: transparent; color: var(--ink); padding: 4px 10px; border-radius: 8px; width: fit-content; cursor: pointer; font-variant-numeric: tabular-nums; }
 .meta { font-size: 13px; color: var(--muted); line-height: 1.4; letter-spacing: -.01em; overflow-wrap: anywhere; }
-.foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 18px 18px; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px; padding: 12px 14px 16px; }
 .btn-blue {
-  display: inline-flex; align-items: center; gap: 4px; background: var(--blue); color: var(--on-blue);
-  font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 980px; text-decoration: none; letter-spacing: -.01em;
+  display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; background: var(--blue); color: var(--on-blue);
+  font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 980px; text-decoration: none; letter-spacing: -.01em;
   transition: filter .2s;
 }
 .btn-blue:hover { text-decoration: none; filter: brightness(1.08); }
-.star { border: 0; background: transparent; color: var(--link); padding: 6px 4px; cursor: pointer; font-size: 14px; font-weight: 500; }
+.star { border: 0; background: transparent; color: var(--link); padding: 6px 4px; cursor: pointer; font-size: 14px; font-weight: 500; white-space: nowrap; }
 .star[aria-pressed="true"] { color: var(--orange); }
 .foot-actions { display: flex; align-items: center; gap: 2px; }
 .link-small { font-size: 13px; font-weight: 500; color: var(--link); text-decoration: none; }
@@ -335,13 +336,14 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
 .haut {
   position: fixed; z-index: 25;
   right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line);
-  background: var(--glass); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
-  color: var(--ink); box-shadow: 0 4px 16px rgba(0, 0, 0, .14); cursor: pointer;
+  width: 52px; height: 52px; border-radius: 50%; border: 0;
+  background: var(--blue); color: var(--on-blue); box-shadow: 0 6px 20px rgba(0, 0, 0, .22); cursor: pointer;
   display: grid; place-items: center; opacity: 0; transform: translateY(12px); pointer-events: none;
   transition: opacity .25s ease, transform .25s ease;
 }
-.haut svg { width: 20px; height: 20px; }
+.haut svg { width: 22px; height: 22px; }
+.haut:hover { filter: brightness(1.08); }
+@media (min-width: 900px) { .haut { width: 56px; height: 56px; right: 28px; bottom: 28px; } }
 .haut.visible { opacity: 1; transform: none; pointer-events: auto; }
 
 /* Téléphone : affichage compact */
@@ -418,10 +420,10 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
 <body>
 <div class="bar">
   <div class="inner">
-    <div class="name">
+    <a class="name" href="#" id="logo" title="Revenir en haut">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="12" rx="2"></rect><path d="M2.5 8.5h19v3.5h-19zM12 8.5v12M12 8.5c-1.6-3.2-5.5-4.1-5.5-1.6 0 1.6 3 1.6 5.5 1.6zM12 8.5c1.6-3.2 5.5-4.1 5.5-1.6 0 1.6-3 1.6-5.5 1.6z"></path></svg>
       <span>Radar cadeaux</span>
-    </div>
+    </a>
     <div class="bar-right">
       <a class="pill-coeur num" id="coeur-lien" href="#sel-band" hidden>♥ 0</a>
       <span class="pill-count num" id="pill">Black Friday</span>
@@ -1240,10 +1242,13 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   var bHaut = $("haut");
   function majHaut() { bHaut.classList.toggle("visible", window.scrollY > window.innerHeight * 0.8); }
   window.addEventListener("scroll", majHaut, { passive: true });
-  bHaut.addEventListener("click", function () {
+  function remonter(e) {
+    if (e) e.preventDefault();
     var doux = !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     window.scrollTo({ top: 0, behavior: doux ? "smooth" : "auto" });
-  });
+  }
+  bHaut.addEventListener("click", remonter);
+  $("logo").addEventListener("click", remonter);  // le logo ramène aussi en haut
   majHaut();
 
   syncSeg(); renderMust(); renderSel(); renderPeople(); renderDeals(); renderWatch(); renderDrops();
