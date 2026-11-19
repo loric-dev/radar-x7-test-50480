@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Radar cadeaux">
 <title>Radar cadeaux de Noël</title>
+<script>try { if (localStorage.getItem("radar-avance") !== "1") document.documentElement.classList.add("simple"); } catch (e) { document.documentElement.classList.add("simple"); }</script>
 <script>try { var th = localStorage.getItem("radar-theme"); if (th === "light" || th === "dark") document.documentElement.setAttribute("data-theme", th); } catch (e) {}</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -257,6 +258,12 @@ input, select, button { font: inherit; letter-spacing: inherit; }
 #share-link { flex: 1 1 260px; font-size: 13px; }
 .import-band { border: 2px solid var(--blue); }
 
+/* Mode simple : options avancées cachées */
+.simple .avance { display: none !important; }
+.simple .deal .meta { display: none; }
+.bascule { display: flex; justify-content: center; }
+.bascule button { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 980px; padding: 10px 20px; font-size: 15px; cursor: pointer; }
+
 /* Mode d'emploi */
 .howto { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 16px; }
 .step { background: var(--surface); border-radius: var(--r-card); padding: 20px; box-shadow: var(--shadow); display: grid; gap: 6px; align-content: start; }
@@ -359,7 +366,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
       <div class="sec-head"><h2 id="t-people">Pour qui ?</h2>
         <div class="sec-actions"><span class="hint">Tes proches et leurs budgets, enregistrés sur cet appareil.</span>
           <button type="button" class="btn-soft" id="edit-open">✎ Mes personnes</button>
-          <button type="button" class="btn-soft" id="share-open">Partager</button></div>
+          <button type="button" class="btn-soft avance" id="share-open">Partager</button></div>
       </div>
       <div class="people" id="people"></div>
       <div class="panel" id="editor" hidden></div>
@@ -379,7 +386,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
           <input class="field-ctl" type="search" id="q" placeholder="Parfum, Lego, Sephora…" aria-label="Rechercher un deal">
         </div>
         <div class="budget"><label for="max">Budget max</label><input class="field-ctl num" type="number" id="max" min="0" step="5" inputmode="numeric" placeholder="€"></div>
-        <div class="sort"><label for="tri">Trier</label>
+        <div class="sort avance"><label for="tri">Trier</label>
           <span class="wrapsel">
             <select class="field-ctl" id="tri">
               <option value="score">Meilleurs deals</option>
@@ -398,12 +405,12 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5l3 3 3-3"></path></svg>
           </span>
         </div>
-        <div class="seg" id="src" role="group" aria-label="Source">
+        <div class="seg avance" id="src" role="group" aria-label="Source">
           <button type="button" data-v="" aria-pressed="true">Tout</button>
           <button type="button" data-v="Dealabs" aria-pressed="false">Dealabs</button>
           <button type="button" data-v="LeDénicheur" aria-pressed="false">LeDénicheur</button>
           <button type="button" data-v="Marchands" aria-pressed="false">Marchands</button>
-          <button type="button" data-v="X" aria-pressed="false">Comptes X</button>
+          <button type="button" data-v="X" aria-pressed="false" id="src-x" hidden>Comptes X</button>
         </div>
         <span class="result-count num" id="count"></span>
       </div>
@@ -412,14 +419,14 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
       <div style="display:grid;margin-top:20px"><button class="btn-ghost" id="more" type="button" hidden>Afficher plus</button></div>
     </section>
 
-    <section aria-labelledby="t-watch">
+    <section aria-labelledby="t-watch" class="avance">
       <div class="sec-head"><h2 id="t-watch">Produits surveillés.</h2>
         <div class="sec-actions"><span class="hint">Uniquement les produits que tu as choisis de suivre. Le bot relève leur prix toutes les 30 minutes.</span><a class="btn-blue" id="watch-add" target="_blank" rel="noopener" hidden>＋ Suivre un produit</a></div>
       </div>
       <div class="watch" id="watch"></div>
     </section>
 
-    <section aria-labelledby="t-drops">
+    <section aria-labelledby="t-drops" class="avance">
       <div class="sec-head"><h2 id="t-drops">Baisses en cours.</h2><span class="hint" id="drops-hint"></span></div>
       <div id="drops"></div>
     </section>
@@ -427,12 +434,15 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     <section aria-labelledby="t-howto">
       <div class="sec-head"><h2 id="t-howto">Mode d'emploi.</h2></div>
       <div class="howto">
-        <div class="step"><span class="ic" aria-hidden="true">🎯</span><h3>Crée tes personnes</h3><p>« ✎ Mes personnes » : un prénom, un budget et ce qui lui plaît (parfum, gaming, déco…). Touche ensuite sa tuile pour ne voir que ses idées. Tout reste sur ton appareil, sans compte.</p></div>
-        <div class="step"><span class="ic" aria-hidden="true">♡</span><h3>Garde tes idées</h3><p>« Garder » met un produit de côté. Il apparaît dans « Ma sélection », rangé par personne, avec le total à prévoir. Un message t'avertit s'il n'est plus en promo.</p></div>
-        <div class="step"><span class="ic" aria-hidden="true">⏱</span><h3>Suis un prix</h3><p>« Suivre le prix » sur une fiche, ou « Suivre un produit » avec n'importe quel lien. Un formulaire GitHub s'ouvre déjà rempli : indique ton prix cible et valide. Pour arrêter, ferme la demande.</p></div>
-        <div class="step"><span class="ic" aria-hidden="true">🔗</span><h3>Partage</h3><p>« Partager » crée un lien avec tes personnes et ta sélection. La personne qui l'ouvre peut les ajouter à sa page. Attention aux surprises : n'envoie pas tes idées à celui qui va les recevoir.</p></div>
+        <div class="step"><span class="ic" aria-hidden="true">👆</span><h3>Choisis pour qui</h3><p>Touche une tuile dans « Pour qui ? » (Maman, Papa…) : la page ne montre plus que les idées pour cette personne, dans son budget. « ✎ Mes personnes » permet de changer les prénoms, les budgets et ce qui leur plaît.</p></div>
+        <div class="step"><span class="ic" aria-hidden="true">🔎</span><h3>Cherche</h3><p>Tape un mot dans la barre de recherche (« parfum », « Lego », « pull ») ou choisis une marque dans le menu « Marque ». « Voir le deal » ouvre le site du magasin.</p></div>
+        <div class="step"><span class="ic" aria-hidden="true">♡</span><h3>Garde tes idées</h3><p>« Garder » met un produit de côté dans « Ma sélection », avec le total par personne. Tout reste sur ce téléphone ou cet ordinateur, sans compte.</p></div>
+        <div class="step avance"><span class="ic" aria-hidden="true">⏱</span><h3>Suis un prix</h3><p>« Suivre le prix » sur une fiche, ou « Suivre un produit » avec n'importe quel lien. Un formulaire GitHub s'ouvre déjà rempli : indique ton prix cible et valide. Pour arrêter, ferme la demande.</p></div>
+        <div class="step avance"><span class="ic" aria-hidden="true">🔗</span><h3>Partage</h3><p>« Partager » crée un lien avec tes personnes et ta sélection. La personne qui l'ouvre peut les ajouter à sa page. Attention aux surprises : n'envoie pas tes idées à celui qui va les recevoir.</p></div>
       </div>
     </section>
+
+    <div class="bascule"><button type="button" id="bascule-avance"></button></div>
 
     <footer>
       Page mise à jour automatiquement à chaque passage du bot. Les deals restent affichés 7 jours après leur dernière apparition. Vérifie toujours le prix sur le site avant d'acheter.
@@ -659,7 +669,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
       '<div class="body"><div class="eyebrow">' + eyebrow + '</div><h3>' + esc(d.titre) + '</h3>' +
       '<div class="price">' + price + '</div>' + (badges ? '<div class="badges">' + badges + '</div>' : "") + code +
       '<div class="chips">' + chips + '</div><div class="meta">' + meta + '</div>' +
-      (D.repo && d.src !== "Dealabs" && d.src !== "X" ? '<a class="link-small" href="' + esc(suivreUrl(d.titre, d.url, d.prix, pour(d))) + '" target="_blank" rel="noopener">⏱ Suivre le prix</a>' : "") + '</div>' +
+      (D.repo && d.src !== "Dealabs" && d.src !== "X" ? '<a class="link-small avance" href="' + esc(suivreUrl(d.titre, d.url, d.prix, pour(d))) + '" target="_blank" rel="noopener">⏱ Suivre le prix</a>' : "") + '</div>' +
       '<div class="foot"><a class="btn-blue" href="' + esc(d.url) + '" target="_blank" rel="noopener">Voir le deal</a>' +
       '<button type="button" class="star" data-id="' + esc(d.id) + '" aria-pressed="' + (!!favs[d.id]) + '">' + (favs[d.id] ? "♥ Gardé" : "♡ Garder") + '</button></div>' +
       '</article>';
@@ -1026,6 +1036,21 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     $("must-hint").textContent = "Les meilleurs deals de ces 3 derniers jours.";
     $("must").innerHTML = list.map(card).join("");
   }
+
+  /* Mode simple / options avancées (mémorisé sur cet appareil) */
+  function majBascule() {
+    var simple = document.documentElement.classList.contains("simple");
+    $("bascule-avance").textContent = simple ? "Afficher les options avancées" : "Revenir à l'affichage simple";
+  }
+  $("bascule-avance").addEventListener("click", function () {
+    var simple = document.documentElement.classList.toggle("simple");
+    try { localStorage.setItem("radar-avance", simple ? "0" : "1"); } catch (e) {}
+    if (simple) { state.src = ""; if (state.tri === "marque") state.tri = "score"; $("tri").value = state.tri; save(); syncSeg(); renderDeals(); }
+    majBascule();
+  });
+  majBascule();
+  if (document.documentElement.classList.contains("simple")) { state.src = ""; if (state.tri === "marque") state.tri = "score"; $("tri").value = state.tri; }
+  $("src-x").hidden = !D.deals.some(function (d) { return d.src === "X"; });
 
   syncSeg(); renderMust(); renderSel(); renderPeople(); renderDeals(); renderWatch(); renderDrops();
 })();

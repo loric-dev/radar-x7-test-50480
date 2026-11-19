@@ -16,6 +16,8 @@ Le bot repère les vrais gros deals (mode, beauté, maison, high-tech, jeux, jou
 | **Baisses en cours** | Les produits LeDénicheur dont le prix vient de baisser. |
 | **Mode d'emploi** | Le résumé en 4 étapes, en bas de la page. |
 
+**Affichage simple par défaut** : un visiteur ne voit que l'essentiel (À ne pas rater, Pour qui ?, Ma sélection, Tous les deals avec recherche, budget et marque). Le bouton **« Afficher les options avancées »**, tout en bas de la page, montre le reste : tri, sources, regroupement par marque, Suivre le prix, Produits surveillés, Baisses en cours, Partager. Le choix est mémorisé sur chaque appareil.
+
 En haut à droite, tu choisis l'apparence : **Automatique** (comme ton téléphone ou ton ordinateur), **Clair** ou **Sombre**.
 
 ### Créer ses personnes (pour chaque visiteur)
