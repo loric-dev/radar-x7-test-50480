@@ -389,6 +389,7 @@ catalogues:
   reduction_min: 25                 # prix barré : -25 % minimum
   baisse_historique: 20             # sinon : -20 % sous le prix relevé par le bot
   max_par_site: 40                  # au plus 40 promos affichées par site
+  paralleles: 24                    # sites lus en même temps (sites différents : reste poli pour chacun)
   sites:
     # Maison & meubles
     - {nom: Sklum, sitemap: "https://www.sklum.com/fr/img/core/skl/feed/sitemaps/index_sitemap_skl_fr.xml",
