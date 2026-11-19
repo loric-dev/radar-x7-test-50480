@@ -554,6 +554,15 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   }
   var personnes = store.get("radar-personnes", null);
   if (!Array.isArray(personnes) || !personnes.length) personnes = copieDefaut();
+  // Mise à jour : l'ancienne tuile « Coup de cœur » (deals très votés) s'appelle désormais « Top deals »
+  var renomme = false;
+  personnes.forEach(function (p) {
+    if (p.nom === "Coup de cœur" && (p.interets || []).indexOf("coup_de_coeur") >= 0) {
+      p.nom = "Top deals"; renomme = true;
+      if (state.who === "Coup de cœur") state.who = "Top deals";
+    }
+  });
+  if (renomme) store.set("radar-personnes", personnes);
   function norm(s) { return " " + sansAccent(s).replace(/[^a-z0-9]+/g, " ").trim() + " "; }
   function terme(x, txt) {
     x = norm(x).trim();
@@ -587,6 +596,7 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   if (state.who && !personnes.some(function (p) { return p.nom === state.who; })) state.who = "";
 
   var favs = store.get("radar-favoris", {});
+  if (renomme) Object.keys(favs).forEach(function (id) { if (favs[id] && favs[id].qui === "Coup de cœur") favs[id].qui = "Top deals"; });
   var parId = {}; D.deals.forEach(function (d) { parId[d.id] = d; });
   function instantane(d) {
     return { titre: d.titre, url: d.url, prix: d.prix, ref: d.ref, red: d.red, marchand: d.marchand, img: d.img,
