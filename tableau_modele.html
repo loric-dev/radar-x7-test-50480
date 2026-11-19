@@ -35,6 +35,9 @@
   --green: #248a3d;
   --green-soft: rgba(36, 138, 61, .11);
   --on-blue: #ffffff;
+  --gold: #c9a227;          /* décorations de Noël */
+  --neige: rgba(150, 170, 200, .75);
+  --fil: #8a8f98;
   --media: #ffffff;
   --shadow: 0 2px 6px rgba(0, 0, 0, .04), 0 8px 24px rgba(0, 0, 0, .06);
   --shadow-hover: 0 4px 12px rgba(0, 0, 0, .06), 0 16px 40px rgba(0, 0, 0, .1);
@@ -50,6 +53,8 @@
     --glass: rgba(22, 22, 23, .78); --blue: #0a84ff; --link: #2997ff; --blue-soft: rgba(10, 132, 255, .18);
     --red: #ff453a; --red-soft: rgba(255, 69, 58, .16); --orange: #ff9f0a; --heat: #ff9f0a; --heat-soft: rgba(255, 159, 10, .15);
     --green: #30d158; --green-soft: rgba(48, 209, 88, .15); --on-blue: #ffffff; --media: #2c2c2e;
+  --gold: #f5d061; --neige: rgba(255, 255, 255, .85); --fil: #5c5f66;
+    --gold: #f5d061; --neige: rgba(255, 255, 255, .85); --fil: #5c5f66;
     --shadow: none; --shadow-hover: 0 0 0 1px #48484a;
     color-scheme: dark;
   }
@@ -59,6 +64,7 @@
   --glass: rgba(22, 22, 23, .78); --blue: #0a84ff; --link: #2997ff; --blue-soft: rgba(10, 132, 255, .18);
   --red: #ff453a; --red-soft: rgba(255, 69, 58, .16); --orange: #ff9f0a; --heat: #ff9f0a; --heat-soft: rgba(255, 159, 10, .15);
   --green: #30d158; --green-soft: rgba(48, 209, 88, .15); --on-blue: #ffffff; --media: #2c2c2e;
+  --gold: #f5d061; --neige: rgba(255, 255, 255, .85); --fil: #5c5f66;
   --shadow: none; --shadow-hover: 0 0 0 1px #48484a;
   color-scheme: dark;
 }
@@ -332,6 +338,22 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
 }
 @media (max-width: 480px) { .pill-count { display: none; } }
 
+/* Décorations de Noël */
+.guirlande { height: 30px; overflow: hidden; pointer-events: none; }
+.guirlande svg { display: block; width: 100%; height: 30px; }
+.guirlande .fil { fill: none; stroke: var(--fil); stroke-width: 1.2; }
+.guirlande .culot { fill: var(--fil); }
+.guirlande .ampoule { animation: scintille 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.guirlande .r { fill: var(--red); } .guirlande .v { fill: var(--green); } .guirlande .o { fill: var(--gold); } .guirlande .b { fill: var(--blue); }
+@keyframes scintille { 0%, 100% { opacity: 1; filter: drop-shadow(0 0 3px currentColor); } 50% { opacity: .45; filter: none; } }
+.hero { position: relative; isolation: isolate; }
+.hero > * { position: relative; z-index: 1; }
+.hero canvas.neige { position: absolute; inset: -40px 0 0 0; width: 100%; height: calc(100% + 40px); z-index: 0; pointer-events: none; -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent); mask-image: linear-gradient(to bottom, #000 60%, transparent); }
+.houx { display: inline-block; width: .9em; height: .9em; vertical-align: -.05em; margin-left: .12em; }
+.houx .feuille { fill: var(--green); } .houx .baie { fill: var(--red); }
+.fetes { text-align: center; font-size: 15px; color: var(--muted); margin-bottom: 14px; letter-spacing: -.01em; }
+@media (prefers-reduced-motion: reduce) { .guirlande .ampoule { animation: none; } }
+
 /* Bouton « retour en haut » */
 .haut {
   position: fixed; z-index: 25;
@@ -442,10 +464,13 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   </div>
 </div>
 
+<div class="guirlande" aria-hidden="true"><svg id="guirlande"></svg></div>
+
 <div class="inner">
   <header class="hero">
+    <canvas class="neige" id="neige" aria-hidden="true"></canvas>
     <div>
-      <h1>Les bons plans de Noël.</h1>
+      <h1>Les bons plans de Noël.<svg class="houx" viewBox="0 0 40 40" aria-hidden="true"><path class="feuille" d="M20 21c-3-6-10-9-17-7 2 2 1 5 3 6-2 1-2 3-1 5 5 0 11-1 15-4z"/><path class="feuille" d="M20 21c3-6 10-9 17-7-2 2-1 5-3 6 2 1 2 3 1 5-5 0-11-1-15-4z"/><circle class="baie" cx="16" cy="23" r="3.6"/><circle class="baie" cx="24" cy="23" r="3.6"/><circle class="baie" cx="20" cy="18" r="3.6"/></svg></h1>
       <p class="lead">Les vrais bons plans, triés pour chacun de tes proches.</p>
       <p class="upd" id="maj"></p>
     </div>
@@ -554,6 +579,8 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
     </section>
 
     <div class="bascule"><button type="button" id="bascule-avance"></button></div>
+
+    <p class="fetes">🎄 Joyeuses fêtes et bons achats !</p>
 
     <footer>
       Page mise à jour automatiquement à chaque passage du bot. Les deals restent affichés 7 jours après leur dernière apparition. Vérifie toujours le prix sur le site avant d'acheter.
@@ -1237,6 +1264,54 @@ footer { font-size: 12px; line-height: 1.5; color: var(--muted); border-top: 1px
   majBascule();
   if (document.documentElement.classList.contains("simple")) { state.src = ""; if (state.tri === "marque") state.tri = "score"; $("tri").value = state.tri; }
   $("src-x").hidden = !D.deals.some(function (d) { return d.src === "X"; });
+
+  /* Guirlande : ampoules réparties sur toute la largeur */
+  function dessinerGuirlande() {
+    var svg = $("guirlande"), w = Math.max(320, document.documentElement.clientWidth), pas = w < 600 ? 34 : 44;
+    var n = Math.ceil(w / pas) + 1, couleurs = ["r", "v", "o", "b"], s = "";
+    var chemin = "M0 4";
+    for (var i = 0; i < n; i++) { chemin += " Q" + (i * pas + pas / 2) + " 16 " + ((i + 1) * pas) + " 4"; }
+    s += '<path class="fil" d="' + chemin + '"/>';
+    for (var k = 0; k < n; k++) {
+      var x = k * pas + pas / 2, c = couleurs[k % 4];
+      s += '<rect class="culot" x="' + (x - 2.2) + '" y="9" width="4.4" height="4" rx="1"/>' +
+           '<ellipse class="ampoule ' + c + '" style="animation-delay:' + ((k % 5) * 0.45).toFixed(2) + 's;color:var(--' + { r: "red", v: "green", o: "gold", b: "blue" }[c] + ')" cx="' + x + '" cy="19" rx="4" ry="6"/>';
+    }
+    svg.setAttribute("viewBox", "0 0 " + w + " 30");
+    svg.innerHTML = s;
+  }
+  dessinerGuirlande();
+  window.addEventListener("resize", dessinerGuirlande);
+
+  /* Neige : quelques flocons dans l'en-tête seulement */
+  (function neige() {
+    var cv = $("neige"), ctx = cv.getContext && cv.getContext("2d"); if (!ctx) return;
+    var calme = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var flocons = [], visible = true, w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function taille() {
+      w = cv.clientWidth; h = cv.clientHeight; cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var n = Math.round(Math.min(60, w / 18));
+      flocons = Array.from({ length: n }, function () { return { x: Math.random() * w, y: Math.random() * h, r: 1 + Math.random() * 2.2, v: .25 + Math.random() * .6, d: Math.random() * 6.28 }; });
+    }
+    function dessiner() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--neige") || "rgba(200,210,230,.8)";
+      flocons.forEach(function (f) { ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill(); });
+    }
+    function animer() {
+      if (!visible || document.hidden) return;
+      flocons.forEach(function (f) { f.y += f.v; f.d += .01; f.x += Math.sin(f.d) * .3; if (f.y > h + 4) { f.y = -4; f.x = Math.random() * w; } });
+      dessiner(); requestAnimationFrame(animer);
+    }
+    taille(); dessiner();
+    if (calme) return;  // mouvements réduits : flocons immobiles
+    window.addEventListener("resize", taille);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (e) { var v = e[0].isIntersecting; if (v && !visible) { visible = true; animer(); } visible = v; }).observe(cv);
+    }
+    document.addEventListener("visibilitychange", function () { if (!document.hidden && visible) animer(); });
+    animer();
+  })();
 
   /* Retour en haut : visible après avoir défilé d'un écran */
   var bHaut = $("haut");
